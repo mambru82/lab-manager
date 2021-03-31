@@ -36,4 +36,4 @@ Run.init(
 );
 
 
-module.exports = Assay;
+module.exports = Run;
