@@ -20,7 +20,7 @@ Patient.init(
             allowNull: false
         },
         dob: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
     },
