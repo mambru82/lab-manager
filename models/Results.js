@@ -40,7 +40,7 @@ Results.init(
         qc_missing_data: {
             score: {
                 type: DataTypes.INTEGER,
-                allowNull: true    
+                allowNull: true
             },
             total_missing: {
                 type: DataTypes.INTEGER,
