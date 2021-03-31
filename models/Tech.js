@@ -19,6 +19,10 @@ Tech.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        supervisor: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         assay_id: {
             type: DataTypes.INTEGER,
             references: {
