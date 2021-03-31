@@ -3,7 +3,13 @@
 async function loginFormHandler(event) {
   event.preventDefault();
 
-  //const username = document.querySelector("#username-signup").value.trim();
+  //>>> =====================================
+  //>>> DELETE- ONLY FOR TESTING
+  document.location.replace("/tech-main");
+  return;
+  //>>> =====================================
+
+  const username = document.querySelector("#username-login").value.trim();
   const password = document.querySelector("#password-login").value.trim();
 
   if (username && password) {
@@ -17,7 +23,7 @@ async function loginFormHandler(event) {
     });
 
     if (response.ok) {
-      document.location.replace("/");
+      document.location.replace("/tech-main");
     } else {
       alert(response.statusText);
     }
@@ -27,6 +33,3 @@ async function loginFormHandler(event) {
 
 document.querySelector(".login-form");
 document.addEventListener("submit", loginFormHandler);
-
-//
-//document.addEventListener("submit", signupFormHandler);

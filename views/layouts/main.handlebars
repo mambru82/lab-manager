@@ -14,19 +14,28 @@
             <h1>
                 <a href="/">Lab Manager</a>
             </h1>
+            {{#if loggedIn}}
+            <nav>
+                <button id="logout" class="btn-no-style">logout</button>
+            </nav>
+            {{else}}
             <nav>
                 <a href="/login">login</a>
             </nav>
             <nav>
                 <a href="/signup">signup</a>
             </nav>
+           {{/if}}
         </header>
         <main>
             {{{ body }}}
         </main>
         
     </div>
-
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
+    
 </body>
 
 </html>
