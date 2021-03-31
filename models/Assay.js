@@ -16,7 +16,7 @@ Assay.init(
             allowNull: false
         },
         analyte: {
-            type: DataTypes.ARRAY,
+            type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false
         }
     },

@@ -19,7 +19,7 @@ Run.init(
             }
         },
         tech_id: {
-            type: DataTypes.ARRAY,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'tech',
                 key: 'id'
