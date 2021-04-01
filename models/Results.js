@@ -33,7 +33,7 @@ Results.init(
             type: DataTypes.STRING,
             allowNull: true,
         },
-        qc: {
+        qc: [{
             missing_data: {
                 score: {
                     type: DataTypes.INTEGER,
@@ -62,7 +62,7 @@ Results.init(
                     type: DataTypes.STRING,
                     allowNull: true
                 }
-            }},
+            }}],
         nearest_tree_node_id: {
             type: DataTypes.INTEGER,
             allowNull: true
