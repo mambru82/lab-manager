@@ -16,9 +16,9 @@ Tech.hasMany(Run, {
     foreignKey: 'run_id'
 });
 
-Tech.hasMany(Results, {
-    foreignKeyKey: 'run_id'
-});
+// Tech.hasMany(Results, {
+//     foreignKeyKey: 'run_id'
+// });
 
 Patient.hasOne(Tech, {
     foreignKey: 'tech_id'
