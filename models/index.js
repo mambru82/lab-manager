@@ -8,12 +8,24 @@ Run.belongsTo(Tech, {
     foreignKey: 'tech_id'
 });
 
-Run.belongsTo(Assay, {
+Run.hasOne(Assay, {
     foreignKey: 'assay_id'
 });
 
 Tech.belongsTo(Assay, {
     foreignKey: 'assay_id'
+});
+
+Tech.hasMany(Run, {
+    foreignKey: 'run_id'
+});
+
+Tech.hasMany(Assay, {
+    foreignKey: 'assay_id'
+});
+
+Tech.hasMany(Results, {
+    foreignKeyKey: 'run_id'
 });
 
 Patient.hasOne(Tech, {
@@ -22,6 +34,18 @@ Patient.hasOne(Tech, {
 
 Patient.hasMany(Results, {
     foreignKey: 'result_id'
+});
+
+Results.hasOne(Patient, {
+    foreignKey: 'patitent_id'
+});
+
+Assay.hasMany(Run, {
+    foreignKey: 'run_id'
+});
+
+Assay.hasMany(Tech, {
+    foreignKey: 'tech_id'
 });
 
 module.exports = { Patient, Assay, Tech, Run, Results };

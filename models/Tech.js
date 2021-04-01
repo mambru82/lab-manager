@@ -51,7 +51,7 @@ Tech.init(
         hooks: {
             async beforeCreate(newTechData) {
                 newTechData.password = await bcrypt.hash(newTechData.password, 10)
-                return newUserData
+                return newTechData;
             },
 
             async beforeUpdate(updatedTechData) {
