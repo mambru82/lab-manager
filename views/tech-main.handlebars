@@ -1,14 +1,13 @@
+<p>List of patients in the system</p>
+<table id="patients-table">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>DOB</th>
+    </tr>
+{{#each patients as |patient|}}
+    {{> patient-info patient }}
+{{/each}}
+</table>
 
-<p>This page is the Tech starting page that will show results</p>
-</br>
-</br>
-</br>
-<button id="btn-show-patients" class="btn-no-style">Show Patients</button>
-<ol class="post-list">
-    {{#each patients as |patient|}}
-    <li>
-        {{> patient-info patient }}
-    </li>
-    {{/each}}
-</ol>
 <script src="/javascript/tech-main.js"></script>
