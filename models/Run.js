@@ -1,9 +1,9 @@
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Assay extends Model {}
+class Run extends Model {}
 
-Assay.init(
+Run.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,13 +11,19 @@ Assay.init(
             primaryKey: true,
             autoIncrement: true
         },
-        assay_name: {
+        assay_id: {
             type: DataTypes.STRING,
-            allowNull: false
+            references: {
+                model: 'assay',
+                key: 'id'
+            }
         },
-        analyte: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
+        tech_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'tech',
+                key: 'id'
+            }
         }
     },
     {
@@ -25,9 +31,9 @@ Assay.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: "assay"
+        modelName: "run"
     }
 );
 
 
-module.exports = Assay;
+module.exports = Run;
