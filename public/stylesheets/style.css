@@ -14,6 +14,20 @@ body {
     color: #eee;
     color: rgba(255,255,255,.85);
 }
+
+.btn-no-style {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color:white;
+  font-size: 100%;
+  font-weight: bold;
+  transition: color .1s;
+  margin-left: 16px;
+}
+
 #container { 
     padding-top: 50px;
 }
