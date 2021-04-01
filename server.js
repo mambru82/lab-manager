@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require("path");
 const exphbs = require("express-handlebars");
-//const sequelize = require('sequelize');
+const sequelize = require('./config/connection');
 const hbs = exphbs.create({});
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(require('./controllers/'));
 
-//sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
-//});
+});
 
