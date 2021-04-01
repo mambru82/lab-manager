@@ -12,7 +12,7 @@ Run.init(
             autoIncrement: true
         },
         assay_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'assay',
                 key: 'id'

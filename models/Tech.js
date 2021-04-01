@@ -1,8 +1,12 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection.js');
 const bcrypt = require('bcrypt');
+const sequelize = require('../config/connection');
 
-class Tech extends Model {}
+class Tech extends Model {
+    checkPassword(loginPw) {
+        return bcrypt.compareSync(loginPw, this.password)
+    }
+}
 
 Tech.init(
     {
@@ -54,9 +58,8 @@ Tech.init(
                 updatedTechData.password = await bcrypt.hash(updatedTechData.password, 10);
                 return updatedTechData;
             }
-        }
-    },
-    {
+        },
+    
         sequelize,
         timestamps: false,
         freezeTableName: true,
