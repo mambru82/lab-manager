@@ -1,0 +1,18 @@
+[
+  {
+    "seqName": "2019-nCoV_MN908947|DUMMY15",
+    "clade": "20I/501Y.V1",
+    "qc": {
+        "missingData": {
+        "score": 0,
+        "totalMissing": 0,
+        "missingDataThreshold": 3000,
+        "status": "good"
+      },
+      "overallScore": 0.17361111111111113,
+      "overallStatus": "good"
+    },
+    "nearestTreeNodeId": 2685,
+    "errors": []
+  }
+]
