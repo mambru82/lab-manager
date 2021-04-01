@@ -1,5 +1,5 @@
 const {Model, DataTypes} = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection.js');
 
 class Run extends Model {}
 
@@ -12,14 +12,14 @@ Run.init(
             autoIncrement: true
         },
         assay_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'assay',
                 key: 'id'
             }
         },
         tech_id: {
-            type: DataTypes.ARRAY,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'tech',
                 key: 'id'

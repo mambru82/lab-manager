@@ -1,32 +1,16 @@
-const { Tag } = require('../models');
+const {Run} = require('../models');
 
-const tagData = [
-  {
-    tag_name: 'rock music',
-  },
-  {
-    tag_name: 'pop music',
-  },
-  {
-    tag_name: 'blue',
-  },
-  {
-    tag_name: 'red',
-  },
-  {
-    tag_name: 'green',
-  },
-  {
-    tag_name: 'white',
-  },
-  {
-    tag_name: 'gold',
-  },
-  {
-    tag_name: 'pop culture',
-  },
+const runData = [
+    {
+        tech_id: '1',
+        assay_id: '1'
+    },
+    {
+        tech_id: '2',
+        assay_id: '1'
+    }
 ];
 
-const seedTags = () => Tag.bulkCreate(tagData);
+const seedRun = () => Run.bulkCreate(runData);
 
-module.exports = seedTags;
+module.exports = seedRun;

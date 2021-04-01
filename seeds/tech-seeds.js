@@ -1,32 +1,24 @@
-const { Tag } = require('../models');
+const {Tech} = require('../models');
 
-const tagData = [
-  {
-    tag_name: 'rock music',
-  },
-  {
-    tag_name: 'pop music',
-  },
-  {
-    tag_name: 'blue',
-  },
-  {
-    tag_name: 'red',
-  },
-  {
-    tag_name: 'green',
-  },
-  {
-    tag_name: 'white',
-  },
-  {
-    tag_name: 'gold',
-  },
-  {
-    tag_name: 'pop culture',
-  },
+const techData = [
+    {
+        first_name: 'Meridith',
+        last_name: 'Grey',
+        supervisor: 'Derek Shepherd',
+        username: 'elegante',
+        password: '1234',
+        assay_id: '1'
+    },
+    {
+        first_name: 'Christina',
+        last_name: 'Yang',
+        supervisor: 'Derek Shepherd',
+        username: 'elegante2',
+        password: '1234',
+        assay_id: '1'
+    }
 ];
 
-const seedTags = () => Tag.bulkCreate(tagData);
+const seedTech = () => Tech.bulkCreate(techData);
 
-module.exports = seedTags;
+module.exports = seedTech;

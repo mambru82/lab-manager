@@ -1,24 +1,39 @@
-const Assay = require('./Assay');
 const Patient = require('./Patient');
-const Results = require('./Results');
-const Run = require('./Run');
+const Assay = require('./Assay');
 const Tech = require('./Tech');
-
-//associations
-//One tech can have many runs, one run can only have one tech
-Tech.hasMany(Run, {
-    foreignKey: 'tech_id'
-});
+const Run = require('./Run');
+const Results = require('./Results');
 
 Run.belongsTo(Tech, {
     foreignKey: 'tech_id'
-})
-
-//One assay can have many runs, one run can only have one assay
-Assay.hasMany(Run, {
-    foreignKey: 'assay_id'
-})
+});
 
 Run.belongsTo(Assay, {
     foreignKey: 'assay_id'
-})
+});
+
+Tech.hasMany(Run, {
+    foreignKey: 'run_id'
+});
+
+Tech.hasMany(Results, {
+    foreignKeyKey: 'run_id'
+});
+
+Patient.hasOne(Tech, {
+    foreignKey: 'tech_id'
+});
+
+Patient.hasMany(Results, {
+    foreignKey: 'result_id'
+});
+
+Results.belongsTo(Patient, {
+    foreignKey: 'patient_id'
+});
+
+Assay.hasMany(Run, {
+    foreignKey: 'run_id'
+});
+
+module.exports = { Patient, Assay, Tech, Run, Results };
