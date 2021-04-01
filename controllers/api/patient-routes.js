@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
+const sequelize = require('../../config/connection');
 const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
 //pull a patient list for all patients
@@ -12,7 +12,13 @@ router.get('/', (req, res) => {
             'last_name',
             'dob'
         ],
-        order: [['last_name', 'DESC']]
+        order: [['last_name', 'DESC']],
+        include: [
+            {
+                model: Results,
+                attributes: ['clade']
+            }
+        ]
     })
     .then(dbPatientData => res.json(dbPatientData))
     .catch(err => {

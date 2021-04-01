@@ -25,7 +25,7 @@ Patient.hasOne(Tech, {
 });
 
 Patient.hasMany(Results, {
-    foreignKey: 'result_id'
+    foreignKey: 'patient_id'
 });
 
 Results.belongsTo(Patient, {
