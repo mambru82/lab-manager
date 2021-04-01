@@ -26,7 +26,7 @@ Tech.hasMany(Assay, {
 
 Tech.hasMany(Results, {
     foreignKeyKey: 'run_id'
-})
+});
 
 Patient.hasOne(Tech, {
     foreignKey: 'tech_id'
