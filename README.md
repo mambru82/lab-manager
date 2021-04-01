@@ -8,7 +8,7 @@ mysql -u root -p
 Enter 1234 as the password.
 
 Create the database.
-```bash
+```mysql
 mysql> CREATE DATABASE lab_manager_db;
 ```
 
