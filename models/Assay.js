@@ -1,5 +1,5 @@
 const {Model, DataTypes} = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection.js');
 
 class Assay extends Model {}
 
@@ -16,7 +16,7 @@ Assay.init(
             allowNull: false
         },
         analyte: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
+            type: DataTypes.STRING,
             allowNull: false
         }
     },
