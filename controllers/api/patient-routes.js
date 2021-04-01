@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
+const sequelize = require('../../config/connection');
 const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
 //pull a patient list for all patients

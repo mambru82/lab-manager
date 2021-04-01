@@ -4,7 +4,7 @@ const resultsRoutes = require('./results-routes');
 const runRoutes = require('./run-routes');
 
 router.use('/patient', patientRoutes);
-router.use('/results', resultsRoutes);
-router.use('/run', runRoutes);
+// router.use('/results', resultsRoutes);
+// router.use('/run', runRoutes);
 
 module.exports = router;
