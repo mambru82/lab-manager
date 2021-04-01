@@ -1,5 +1,6 @@
-const {Model, DataTypes} = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection.js');
+const bcrypt = require('bcrypt');
 
 class Tech extends Model {}
 
@@ -46,7 +47,7 @@ Tech.init(
         hooks: {
             async beforeCreate(newTechData) {
                 newTechData.password = await bcrypt.hash(newTechData.password, 10)
-                return newUserData
+                return newTechData;
             },
 
             async beforeUpdate(updatedTechData) {
