@@ -41,10 +41,14 @@ router.get("/results", (req, res) => {
       const results = dbResultsData.map((results) =>
         results.get({ plain: true })
       );
-      console.log;
+
+      console.log(results);
+      //results.push(createObjectWithDataAnalysis(results));
+      var chartdata = createObjectWithDataAnalysis(results);
+
       res.render("results", {
         results,
-        loggedIn: true, //>>> Remove once security is set
+        chartdata
       });
     })
     .catch((err) => {
@@ -79,5 +83,54 @@ router.get("/patients", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+
+
+
+function createObjectWithDataAnalysis(results) {
+  var rtnObject = {};
+  var len = results.length;
+
+  
+  // Get list of all clades
+  var arrAllRuns = [];
+  for (var i = 0; i < len; i++) {
+    arrAllRuns.push(results[i].run_id);
+  }
+  // Get total unique runs
+  var distinctRuns = arrAllRuns.filter((v, i, a) => a.indexOf(v) === i);
+  
+ 
+  // Get list of all clades
+  var arrAllClades = [];
+  for (var i = 0; i < len; i++) {
+    arrAllClades.push(results[i].clade);
+  }
+
+  //Get list of unique clades
+  var distinctClades = arrAllClades.filter((v, i, a) => a.indexOf(v) === i);
+  var cladesAndCountPairs = [];
+
+  for (var i = 0; i < distinctClades.length; i++) {
+    var count = arrAllClades.reduce(function (n, val) {
+      return n + (val === distinctClades[i]);
+    }, 0);
+    var tmpArr = [];
+    tmpArr.push(distinctClades[i]);
+    tmpArr.push(count);
+    cladesAndCountPairs.push(tmpArr);
+  }
+
+  rtnObject = {
+    total_count: len,
+    distinct_clades: distinctClades,
+    distinct_clades_count: distinctClades.length,
+    clade_count_pairs: cladesAndCountPairs,
+    distinct_runs: distinctRuns,
+    distinct_runs_count: distinctRuns.length,
+  };
+  return rtnObject;
+
+}
 
 module.exports = router;

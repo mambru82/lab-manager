@@ -1,5 +1,8 @@
 <hr>
 <p>List of results</p>
+{{log "variable results: " results}}
+{{log "variable chartdata: " chartdata}}
+
 
 <table id="results-table" <tr>
     <th>First Name</th>
@@ -8,5 +11,36 @@
     <th>clade</th>
     </tr>
     {{#each results as |result|}}
-        {{> results-info result }}
+    {{> results-info result }}
     {{/each}}
+</table>
+
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script type="text/javascript">
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+            {
+                title: {
+                    text: "TITLE OF CHART GOES HERE"
+                },
+                legend: {
+                    maxWidth: 350,
+                    itemWidth: 120
+                },
+                data: [
+                    {
+                        type: "pie",
+                        showInLegend: true,
+                        legendText: "{indexLabel}",
+                        dataPoints: [
+                            {{#each chartdata.clade_count_pairs as | item |}}
+                            { y: {{item.[1]}}, indexLabel: "{{item.[0]}}" },
+                            {{/each}}
+                        ]
+                    }
+                ]
+            });
+        chart.render();
+    }
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
