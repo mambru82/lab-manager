@@ -13,12 +13,12 @@ router.get('/', (req, res) => {
             'dob'
         ],
         order: [['last_name', 'DESC']],
-        include: [
+        include: 
             {
                 model: Results,
                 attributes: ['clade']
             }
-        ]
+        
     })
     .then(dbPatientData => res.json(dbPatientData))
     .catch(err => {

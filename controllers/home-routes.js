@@ -1,4 +1,5 @@
 const Patient = require("../models/Patient");
+const Results = require("../models/Results");
 
 const router = require("express").Router();
 
@@ -21,28 +22,62 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/tech-main", (req, res) => {
-  Patient.findAll({
-    attributes:[
-      'id',
-      'first_name',
-      'last_name',
-      'dob'
-    ]
-  }).then(dbPatientData => {
-      const patients = dbPatientData.map(patients => patients.get({ plain: true }));
+  const theData = { loggedIn: true }; //>>> Remove once security is set
+  res.render("tech-main", theData);
+});
 
-      res.render('tech-main', {
-        patients,
-        loggedIn: true
+router.get("/results", (req, res) => {
+  Results.findAll({
+    attributes: ["patient_id", "run_id", "clade"],
+    order: [["id"]],
+    include: [
+      {
+        model: Patient,
+        attributes: ["first_name", "last_name"],
+      },
+    ],
+  })
+    .then((dbResultsData) => {
+      const results = dbResultsData.map((results) =>
+        results.get({ plain: true })
+      );
+      console.log;
+      res.render("results", {
+        results,
+        loggedIn: true, //>>> Remove once security is set
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
- // res.render("tech-main", {loggedIn:true});
-//});
+
+router.get("/patients", (req, res) => {
+  Patient.findAll({
+    attributes: ["id", "first_name", "last_name", "dob"],
+    order: [["last_name", "DESC"]],
+    include: [
+      {
+        model: Results,
+        attributes: ["clade"],
+      },
+    ],
+  })
+    .then((dbPatientData) => {
+      const patients = dbPatientData.map((patients) =>
+        patients.get({ plain: true })
+      );
+      console.log;
+      res.render("patients", {
+        patients,
+        loggedIn: true, //>>> Remove once security is set
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 module.exports = router;
-
