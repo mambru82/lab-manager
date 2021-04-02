@@ -42,13 +42,12 @@ router.get("/results", (req, res) => {
         results.get({ plain: true })
       );
 
-      console.log(results);
-      //results.push(createObjectWithDataAnalysis(results));
-      var chartdata = createObjectWithDataAnalysis(results);
+      var chartdata = createDataAnalysis(results);
 
       res.render("results", {
         results,
-        chartdata
+        chartdata,
+        loggedIn: true, //>>> Remove once security is set
       });
     })
     .catch((err) => {
@@ -87,30 +86,24 @@ router.get("/patients", (req, res) => {
 
 
 
-function createObjectWithDataAnalysis(results) {
+function createDataAnalysis(results) {
   var rtnObject = {};
   var len = results.length;
 
-  
-  // Get list of all clades
+  // Get individual arrays of runs and clades
   var arrAllRuns = [];
-  for (var i = 0; i < len; i++) {
-    arrAllRuns.push(results[i].run_id);
-  }
-  // Get total unique runs
-  var distinctRuns = arrAllRuns.filter((v, i, a) => a.indexOf(v) === i);
-  
- 
-  // Get list of all clades
   var arrAllClades = [];
   for (var i = 0; i < len; i++) {
+    arrAllRuns.push(results[i].run_id);
     arrAllClades.push(results[i].clade);
   }
 
-  //Get list of unique clades
+  // Get total distinct runs
+  var distinctRuns = arrAllRuns.filter((v, i, a) => a.indexOf(v) === i);
+  //Get list of distinct clades
   var distinctClades = arrAllClades.filter((v, i, a) => a.indexOf(v) === i);
-  var cladesAndCountPairs = [];
 
+  var cladesAndCountPairs = [];
   for (var i = 0; i < distinctClades.length; i++) {
     var count = arrAllClades.reduce(function (n, val) {
       return n + (val === distinctClades[i]);
@@ -130,7 +123,6 @@ function createObjectWithDataAnalysis(results) {
     distinct_runs_count: distinctRuns.length,
   };
   return rtnObject;
-
 }
 
 module.exports = router;
