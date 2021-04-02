@@ -22,6 +22,7 @@ body {
   cursor: pointer;
   text-decoration: none;
   color:black;
+
   font-size: 100%;
   font-weight: bold;
   transition: color .1s;

@@ -6,6 +6,7 @@ const techRoutes = require('./tech-routes')
 
 router.use('/patient', patientRoutes);
 router.use('/results', resultsRoutes);
-// router.use('/run', runRoutes);
+router.use('/run', runRoutes);
+router.use('/tech', techRoutes);
 
 module.exports = router;
