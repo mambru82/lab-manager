@@ -14,6 +14,12 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('homepage');
+  });
+
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
