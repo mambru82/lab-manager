@@ -20,13 +20,21 @@
             </nav>
             {{else}}
             <nav>
-                <a href="/login">login</a>
-            </nav>
-            <nav>
+                <a href="/login">login</a> |
                 <a href="/signup">signup</a>
             </nav>
            {{/if}}
         </header>
+        {{#if loggedIn}}
+        <div>
+            <hr>
+            <nav>
+            <a href="/patients">Patients</a> |
+            <a href="/results">Results</a>
+            </nav>
+            <hr>
+        </div>
+        {{/if}}
         <main>
             {{{ body }}}
         </main>
