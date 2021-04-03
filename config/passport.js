@@ -10,12 +10,24 @@ passport.use(new LocalStrategy(
       if (!tech) {
         return done(null, false, { message: 'Tech not found!' });
       }
-      if (!tech.validPassword(password)) {
+      if (!Tech.checkPassword(password)) {
         return done(null, false, { message: 'Incorrect password!' });
       }
       return done(null, tech);
     });
   }
 ));
+
+// used to serialize the user for the session
+passport.serializeUser(function(tech, done) {
+  done(null, tech.id);
+})
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+  Tech.findById(id, function(err, tech) {
+    done(err, tech);
+  });
+});
 
 module.exports = passport;
