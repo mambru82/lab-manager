@@ -16,11 +16,3 @@ In a new terminal window, cd into the root of the project, run the following com
 ```bash
 npm run seed
 ```
-<<<<<<< HEAD
-=======
-
-Once the databse is seeded, start the app:
-```bash
-npm run start
-```
->>>>>>> b909efcb4208fe0536393bd8156ff2361bb8f29f
