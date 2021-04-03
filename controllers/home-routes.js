@@ -82,6 +82,40 @@ router.get("/patients", (req, res) => {
     });
 });
 
+router.get("/run-metrics", (req, res) => {
+  Results.findAll({
+    attributes: ["patient_id", "run_id", "clade", "errors"],
+    order: [["id"]],
+    include: [
+      {
+        model: Patient,
+        attributes: ["first_name", "last_name"],
+      },
+    ],
+  })
+    .then((dbResultsData) => {
+      const results = dbResultsData.map((results) =>
+        results.get({ plain: true })
+      );
+      var chartdata = resultsDataAnalysis(results);
+
+      res.render("run-metrics", {
+        results,
+        chartdata,
+        loggedIn: true, //>>> Remove once security is set
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+
+//==================================================
+// [Martha] Function to do ananlysis on the resutls 
+// data. Resulting analysis is returned as an object
+//==================================================
 function resultsDataAnalysis(results) {
   var rtnObject = {};
   var len = results.length;
