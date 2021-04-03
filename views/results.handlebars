@@ -1,22 +1,8 @@
 
-<p>List of results</p>
+<h2>Results Summary </h2>
 {{log "variable results: " results}}
 {{log "variable chartdata: " chartdata}}
 
-
-<table id="results-table" <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>run_id</th>
-    <th>clade</th>
-    </tr>
-    {{#each results as |result|}}
-    {{> results-info result }}
-    {{/each}}
-</table>
-
-
-<br>===================================================================================<br>
 <!-- Styles -->
 <style>
     #chartdiv {
@@ -69,3 +55,28 @@
 
 <!-- HTML -->
 <div id="chartdiv" background="white"></div>
+
+<table id="results-summary-table">
+    <th>Clade</th>
+    <th>Count</th>
+    </tr>
+    {{#each chartdata.clade_count_pairs as | item |}}
+    <tr>
+        <td>{{item.[0]}}</td>
+        <td>{{item.[1]}}</td>
+    </tr>
+    {{/each}}
+</table>
+<br>
+<br>
+
+<table id="results-table" <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>run_id</th>
+    <th>clade</th>
+    </tr>
+    {{#each results as |result|}}
+    {{> results-info result }}
+    {{/each}}
+</table>
