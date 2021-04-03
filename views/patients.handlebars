@@ -1,0 +1,14 @@
+<hr>
+<p>List of pateints</p>
+
+<table id="patients-table">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>DOB</th>
+        <th>Clade</th>
+    </tr>
+    {{#each patients as |patient|}}
+        {{> patient-info patient }}
+    {{/each}}
+</table>
