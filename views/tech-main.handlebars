@@ -1,19 +1,19 @@
 <hr>
 <a href="/results">Get Results list</a>
 </br></br>
-<a href="/patients">Get Pateints list</a>
+<a href="/patients">Get Patients list</a>
 </br>
 
 <p>List of patients in the system</p>
 <table id="patients-table">
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>DOB</th>
-    </tr>
-{{#each patients as |patient|}}
-    {{> patient-info patient }}
-{{/each}}
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>DOB</th>
+  </tr>
+  {{#each patients as |patient|}}
+  {{> patient-info patient }}
+  {{/each}}
 </table>
 
 <script src="/javascript/tech-main.js"></script>
