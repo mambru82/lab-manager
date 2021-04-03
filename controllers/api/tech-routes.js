@@ -67,24 +67,24 @@ router.post('/', (req, res) => {
     })
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/tech-main' }), (req, res) => {
     // expects {email: 'lernantino@gmail.com', password: 'password1234'}
     Tech.findOne({
       where: {
         username: req.body.username
       }
     }).then(dbTechData => {
-      if (!dbTechData) {
-        res.status(400).json({ message: 'No user with that username identified!' });
-        return;
-      }
+      // if (!dbTechData) {
+      //   res.status(400).json({ message: 'No user with that username identified!' });
+      //   return;
+      // }
   
-      const validPassword = dbTechData.checkPassword(req.body.password);
+      // const validPassword = dbTechData.checkPassword(req.body.password);
   
-      if (!validPassword) {
-        res.status(400).json({ message: 'Incorrect password!' });
-        return;
-      }
+      // if (!validPassword) {
+      //   res.status(400).json({ message: 'Incorrect password!' });
+      //   return;
+      // }
   
       req.session.save(() => {
         req.session.user_id = dbTechData.id;

@@ -1,7 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const connection = require('./connection');
-const Tech = connection.models.Tech;
+const { Tech } = require('../models/Tech')
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -10,7 +9,7 @@ passport.use(new LocalStrategy(
       if (!tech) {
         return done(null, false, { message: 'Tech not found!' });
       }
-      if (!Tech.checkPassword(password)) {
+      if (!tech.checkPassword(password)) {
         return done(null, false, { message: 'Incorrect password!' });
       }
       return done(null, tech);
