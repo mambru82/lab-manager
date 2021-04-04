@@ -5,7 +5,7 @@ async function loginFormHandler(event) {
 
   //>>> =====================================
   //>>> DELETE- ONLY FOR TESTING
-  document.location.replace("/tech-main");
+  document.location.replace("/run-metrics");
   return;
   //>>> =====================================
 
@@ -23,7 +23,7 @@ async function loginFormHandler(event) {
     });
 
     if (response.ok) {
-      document.location.replace("/tech-main");
+      document.location.replace("/run-metrics");
     } else {
       alert(response.statusText);
     }
