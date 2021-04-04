@@ -23,6 +23,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    console.log(req);
     Results.create({
         patient_id: req.body.patient_id,
         run_id: req.body.run_id,

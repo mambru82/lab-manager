@@ -27,9 +27,13 @@ router.get("/tech-main", (req, res) => {
 });
 
 router.get("/results", (req, res) => {
+  const Op = require("sequelize").Op;
   Results.findAll({
     attributes: ["patient_id", "run_id", "clade", "errors"],
     order: [["id"]],
+    where: {
+      run_id: { [Op.ne]: null },
+    },
     include: [
       {
         model: Patient,
@@ -84,13 +88,19 @@ router.get("/patients", (req, res) => {
 });
 
 router.get("/patients/:id", (req, res) => {
-  //console.log(req.params);
-  //console.log(req.query);
-
   Results.findAll({
-    attributes: ["patient_id", "run_id", "seq_name", "clade", "status", "overall_score", "overall_status", "errors"], 
+    attributes: [
+      "patient_id",
+      "run_id",
+      "seq_name",
+      "clade",
+      "status",
+      "overall_score",
+      "overall_status",
+      "errors",
+    ],
     order: [["id"]],
-    where:{
+    where: {
       patient_id: req.params.id,
     },
     include: [
@@ -100,27 +110,30 @@ router.get("/patients/:id", (req, res) => {
       },
     ],
   })
-  .then((dbResultsData) => {
-    const results = dbResultsData.map((results) =>
-      results.get({ plain: true })
-    );
-    res.render("patients", {
-      results,
-      isPatientResults: true,
-      loggedIn: true, //>>> Remove once security is set
+    .then((dbResultsData) => {
+      const results = dbResultsData.map((results) =>
+        results.get({ plain: true })
+      );
+      res.render("patients", {
+        results,
+        viewingPatientResults: true,
+        loggedIn: true, //>>> Remove once security is set
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
     });
-  })
-  .catch((err) => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-
 });
 
 router.get("/run-metrics", (req, res) => {
+  const Op = require("sequelize").Op;
   Results.findAll({
     attributes: ["patient_id", "run_id", "clade", "errors"],
     order: [["id"]],
+    where: {
+      run_id: { [Op.ne]: null },
+    },
     include: [
       {
         model: Patient,
@@ -146,9 +159,37 @@ router.get("/run-metrics", (req, res) => {
     });
 });
 
+router.get("/accession-case", (req, res) => {
+  Patient.findAll({
+    attributes: ["id", "first_name", "last_name", "dob"],
+    order: [["last_name", "DESC"]],
+  })
+    .then((dbPatientData) => {
+      const patients = dbPatientData.map((patients) =>
+        patients.get({ plain: true })
+      );
+
+      res.render("accession-case", {
+        patients,
+        loggedIn: true, //>>> Remove once security is set
+        notification: req.query.notification,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+router.get("/create-patient", (req, res) => {
+  res.render("create-patient",{
+    notification: req.query.notification,
+    loggedIn: true, //>>> Remove once security is set
+  });
+});
 
 //==================================================
-// [Martha] Function to do ananlysis on the resutls 
+// [Martha] Function to do ananlysis on the resutls
 // data. Resulting analysis is returned as an object
 //==================================================
 function resultsDataAnalysis(results) {
@@ -187,7 +228,10 @@ function resultsDataAnalysis(results) {
 
     var errorCount = 0;
     for (var rId = 0; rId < len; rId++) {
-      if((results[rId].run_id == distinctRunIds[i])&&(results[rId].errors != "")){
+      if (
+        results[rId].run_id == distinctRunIds[i] &&
+        results[rId].errors != ""
+      ) {
         errorCount++;
       }
     }
@@ -195,7 +239,7 @@ function resultsDataAnalysis(results) {
     var tmpArr = [];
     tmpArr.push(distinctRunIds[i]);
     tmpArr.push(errorCount);
-    tmpArr.push(errorCount/count);
+    tmpArr.push(errorCount / count);
     tmpArr.push(count);
     errorRatesArray.push(tmpArr);
   }
