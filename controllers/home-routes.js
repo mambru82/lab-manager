@@ -56,6 +56,7 @@ router.get("/results", (req, res) => {
 });
 
 router.get("/patients", (req, res) => {
+  console.log(req.query);
   Patient.findAll({
     attributes: ["id", "first_name", "last_name", "dob"],
     order: [["last_name", "DESC"]],
@@ -80,6 +81,40 @@ router.get("/patients", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+});
+
+router.get("/patients/:id", (req, res) => {
+  //console.log(req.params);
+  //console.log(req.query);
+
+  Results.findAll({
+    attributes: ["patient_id", "run_id", "seq_name", "clade", "status", "overall_score", "overall_status", "errors"], 
+    order: [["id"]],
+    where:{
+      patient_id: req.params.id,
+    },
+    include: [
+      {
+        model: Patient,
+        attributes: ["first_name", "last_name"],
+      },
+    ],
+  })
+  .then((dbResultsData) => {
+    const results = dbResultsData.map((results) =>
+      results.get({ plain: true })
+    );
+    res.render("patients", {
+      results,
+      isPatientResults: true,
+      loggedIn: true, //>>> Remove once security is set
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+
 });
 
 router.get("/run-metrics", (req, res) => {
