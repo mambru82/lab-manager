@@ -1,7 +1,7 @@
 /* @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900); */
 
 body {
-  background-color: cyan;
+  background-color: rgb(0, 0, 0);
 }
 
 .fa,
@@ -10,11 +10,18 @@ body {
   font-weight: 900;
 }
 
+
 .nav-link {
   animation-name: examples;
   animation-duration: 30s;
 }
-
+.btn-primary {
+color: #fff;
+background-color: rgba(13, 252, 152, 0);
+border-color: rgba(13, 110, 252, 0);
+animation-name: examples;
+  animation-duration: 30s;
+}
 @keyframes examples {
   0% {
     color: red;
@@ -59,7 +66,7 @@ body {
 /* Essential CSS - Makes the effect work */
 
 body {
-  background-color: #3498db;
+  background-color: #5808da;
 }
 
 .bubbles {
@@ -80,15 +87,15 @@ body {
   position: absolute;
   border-radius: 100%;
   bottom: 10px;
-  background-color: rgb(194, 16, 194);
+  background-color: rgb(16, 194, 96);
   z-index: 1;
 }
 .individual-bubble {
   width: 100px;
   height: 100px;
-  color: red;
+  color: rgb(0, 81, 255);
   animation-name: example;
-  animation-duration: 20s;
+  animation-duration: 5s;
 }
 
 @keyframes example {
@@ -99,6 +106,10 @@ body {
     background-color: yellow;
   }
   50% {
+    background-color: rgb(255, 0, 242);
+
+  }
+  75% {
     background-color: blue;
   }
   100% {
@@ -162,7 +173,7 @@ body {
   22%,
   36%,
   75% {
-    color: #e6f4ff;
+    color: #e6fffd;
     text-shadow: 0 0 0.6rem #e8ffe6, 0 0 1.5rem #ff65bd,
       -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd,
       0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
@@ -179,14 +190,14 @@ body {
   }
 }
 
-.flicker {
+/*.flicker {
   animation: shine 2s forwards, blink 3s 2s infinite;
 }
 
 .fast-flicker {
   animation: shine 2s forwards, blink 10s 1s infinite;
 }
-
+*/
 @keyframes shine {
   0% {
     color: #6b1839;
