@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Assay, Patient, Results, Run, Tech } = require('../../models');
-const passport = require('../../config/passport');
 
 //GET /api/users
 router.get('/', (req, res) => {
@@ -67,24 +66,24 @@ router.post('/', (req, res) => {
     })
 });
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+router.post('/login', (req, res) => {
     // expects {email: 'lernantino@gmail.com', password: 'password1234'}
     Tech.findOne({
       where: {
         username: req.body.username
       }
     }).then(dbTechData => {
-      // if (!dbTechData) {
-      //   res.status(400).json({ message: 'No user with that username identified!' });
-      //   return;
-      // }
+      if (!dbTechData) {
+        res.status(400).json({ message: 'No user with that username identified!' });
+        return;
+      }
   
-      // const validPassword = dbTechData.checkPassword(req.body.password);
+      const validPassword = dbTechData.checkPassword(req.body.password);
   
-      // if (!validPassword) {
-      //   res.status(400).json({ message: 'Incorrect password!' });
-      //   return;
-      // }
+      if (!validPassword) {
+        res.status(400).json({ message: 'Incorrect password!' });
+        return;
+      }
   
       req.session.save(() => {
         req.session.user_id = dbTechData.id;
