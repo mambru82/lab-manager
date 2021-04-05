@@ -5,8 +5,8 @@ async function loginFormHandler(event) {
 
   //>>> =====================================
   //>>> DELETE- ONLY FOR TESTING
-  // document.location.replace("/tech-main");
-  // return;
+  document.location.replace("/run-metrics");
+  return;
   //>>> =====================================
 
   const username = document.querySelector("#username-login").value.trim();
@@ -23,7 +23,7 @@ async function loginFormHandler(event) {
     });
 
     if (response.ok) {
-      document.location.replace("/tech-main");
+      document.location.replace("/run-metrics");
     } else {
       alert(response.statusText);
     }

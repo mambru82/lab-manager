@@ -1,22 +1,6 @@
-<hr>
-<p>List of results</p>
-{{log "variable results: " results}}
-{{log "variable chartdata: " chartdata}}
 
+<h2>Results Summary </h2>
 
-<table id="results-table" <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>run_id</th>
-    <th>clade</th>
-    </tr>
-    {{#each results as |result|}}
-    {{> results-info result }}
-    {{/each}}
-</table>
-
-
-<br>===================================================================================<br>
 <!-- Styles -->
 <style>
     #chartdiv {
@@ -24,17 +8,19 @@
         height: 500px;
     }
 </style>
-
 <!-- Resources -->
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/material.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
 
 <!-- Chart code -->
 <script>
     am4core.ready(function () {
 
         // Themes begin
+        am4core.useTheme(am4themes_material);
         am4core.useTheme(am4themes_animated);
         // Themes end
 
@@ -68,4 +54,35 @@
 </script>
 
 <!-- HTML -->
-<div id="chartdiv" background="white"></div>
+<div>
+    <div id="chartdiv" background="white"></div>
+    <div>
+        <table id="results-summary-table" border="1">
+            <th>Clade</th>
+            <th>Count</th>
+            </tr>
+            {{#each chartdata.clade_count_pairs as | item |}}
+            <tr>
+                <td>{{item.[0]}}</td>
+                <td>{{item.[1]}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>
+
+
+<br>
+<br>
+<!--
+<table id="results-table" border="1"><tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>run_id</th>
+    <th>clade</th>
+    </tr>
+    {{#each results as |result|}}
+    {{> results-info result }}
+    {{/each}}
+</table>
+-->

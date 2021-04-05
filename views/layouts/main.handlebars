@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    .notification-box{
+        background-color: lightyellow;
+        color: maroon;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,13 +25,30 @@
             </nav>
             {{else}}
             <nav>
-                <a href="/login">login</a>
-            </nav>
-            <nav>
+                <a href="/login">login</a> |
                 <a href="/signup">signup</a>
             </nav>
            {{/if}}
         </header>
+        {{#if loggedIn}}
+        <div>
+            <hr>
+            <nav>&nbsp;&nbsp;
+            <a href="/run-metrics">Run Metrics</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/patients">Patient List</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/results">Results Summary</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            Tech Metrics&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/accession-case">Accession Case</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/create-patient">Create Patient</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            </nav>
+            <hr>
+        </div>
+        {{/if}}
+        {{#if notification}}
+        <div class="notification-box">
+            {{notification}}
+        </div>
+        {{/if}}
         <main>
             {{{ body }}}
         </main>

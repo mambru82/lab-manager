@@ -21,21 +21,46 @@ router.get('/', (req, res) => {
     })
 
 })
-
+router.get('/:id', (req, res) => {
+    Results.findOne({
+        order: [['id']],
+        include: [
+            {
+                model: Patient,
+                attributes: ['first_name', 'last_name']
+            }
+        ],
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbTechData => {
+        if (!dbTechData) {
+            res.status(404).json({ message: 'No tech found with this id'});
+            return;
+        }
+        res.json(dbTechData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+})
 router.post('/', (req, res) => {
+    console.log(req);
     Results.create({
         patient_id: req.body.patient_id,
         run_id: req.body.run_id,
-        seq_name: req.body.seq_name,
+        seq_name: req.body.seqName,
         clade: req.body.clade,
-        qc_missing_data_score: req.body.qc_missing_data_score,
-        total_missing: req.body.total_missing,
-        missing_data_threshold: req.body.missing_data_threshold,
-        status: req.body.status,
-        overall_score: req.body.overall_score,
-        overall_status: req.body.overall_status,
-        nearest_tree_node_id: req.body.nearest_tree_node_id,
-        errors: req.body.errors
+        qc_missing_data_score: req.body.qc.missingData.score,
+        total_missing: req.body.qc.missingData.totalMissing,
+        missing_data_threshold: req.body.qc.missingData.missingDataThreshold,
+        status: req.body.qc.missingData.status,
+        overall_score: req.body.qc.overallScore,
+        overall_status: req.body.qc.overallStatus,
+        nearest_tree_node_id: req.body.nearestTreeNodeId,
+        errors: req.body.errors[0]
     })
     .then(dbPatientData => res.json(dbPatientData))
     .catch(err => {
@@ -43,6 +68,41 @@ router.post('/', (req, res) => {
         res.status(400).json(err);
     })
 });
+
+router.put('/:id', (req, res) => {
+    //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
+
+    // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
+    Results.update({
+        result_date: sequelize.literal('CURRENT_TIMESTAMP'),
+        seq_name: req.body.seqName,
+        clade: req.body.clade,
+        qc_missing_data_score: req.body.qc.missingData.score,
+        total_missing: req.body.qc.missingData.totalMissing,
+        missing_data_threshold: req.body.qc.missingData.missingDataThreshold,
+        status: req.body.qc.missingData.status,
+        overall_score: req.body.qc.overallScore,
+        overall_status: req.body.qc.overallStatus,
+        nearest_tree_node_id: req.body.nearestTreeNodeId,
+        errors: req.body.errors[0]
+    }, {
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbResultsData=> {
+        if (!dbResultsData[0]) {
+            res.status(404).json({ message: 'No result found with this id' });
+            return;
+        }
+        res.json(dbResultsData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+});
+
 
 router.delete('/:id', (req, res) => {
     Results.destroy({
