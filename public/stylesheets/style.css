@@ -39,7 +39,7 @@ animation-name: examples;
     color: orange;
   }
   100% {
-    color: green;
+    color: rgb(38, 224, 38);
   }
 }
 /* Non essential CSS - Just for example centering */
@@ -95,7 +95,7 @@ body {
   height: 100px;
   color: rgb(0, 81, 255);
   animation-name: example;
-  animation-duration: 5s;
+  animation-duration: 3s;
 }
 
 @keyframes example {
@@ -352,7 +352,7 @@ body {
   margin-left: -100px;
   border-bottom: 100px;
 }
-.mo-fire3 {
+.mo-fire-3 {
   width: 200px;
   height: auto;
   position: absolute;
@@ -364,7 +364,7 @@ body {
   width: 200px;
   height: auto;
   position: absolute;
-  left:50%;
+  left:30%;
   margin-left: -100px;
   border-bottom: 100px;
 }
@@ -373,21 +373,24 @@ body {
   width: 200px;
   height: auto;
   position: absolute;
-  left:30%;
+  left:10%;
   margin-left: -100px;
   border-bottom: 100px;
 }
 
 .mo-fire svg {
   width: 100%;
-  height: auto;
+  
   position: relative
 }
-.mo-fire-4 svg {
+
+
+/*.mo-fire-4 svg {
   width: 100%;
   height: auto;
   position: relative
 }
+*/
 .flame {
   animation-name: flamefly;
   animation-duration: 2s;
@@ -447,3 +450,4 @@ body {
     transform: translate(-20px, -100px) rotate(180deg);
     opacity: 0;
   }
+}
