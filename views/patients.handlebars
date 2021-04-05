@@ -1,14 +1,49 @@
-<hr>
-<p>List of pateints</p>
 
-<table id="patients-table">
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>DOB</th>
-        <th>Clade</th>
-    </tr>
-    {{#each patients as |patient|}}
-        {{> patient-info patient }}
-    {{/each}}
-</table>
+
+
+{{#if viewingPatientResults}}
+    {{#if results.length}}
+        <p>Results for patient: {{results.[0].patient.first_name}} {{results.[0].patient.last_name}}</p>
+        <table id="patients-table" border="1">
+        <tr>
+            <th>patient</th>
+            <th>run_id</th>
+            <th>seq_name</th>
+            <th>clade</th>
+            <th>overall_score</th>
+            <th>overall_status</th>
+            <th>errors</th>
+        </tr>
+        {{#each results as |item|}}
+        <tr>
+            <td>{{item.patient.first_name}} {{item.patient.last_name}}</td>
+            <td>{{item.run_id}}</td>
+            <td>{{item.seq_name}}</td>
+            <td>{{item.clade}}</td>
+            <td>{{item.overall_score}}</td>
+            <td>{{item.overall_status}}</td>
+            <td>{{item.errors}}</td>
+        </tr>
+        {{/each}}
+        </table>
+    {{else}}
+        <p>This patient has no records.</p>
+    {{/if}}
+{{else}}
+    <p>List of patients</p>
+    <table id="patients-table">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>DOB</th>
+            <th>&nbsp;</th>
+            
+        </tr>
+        {{#each patients as |patient|}}
+            {{> patient-info patient }}
+        {{/each}}
+    </table>
+{{/if}}
+
+
+<script src="/javascript/patient-info.js"></script>
