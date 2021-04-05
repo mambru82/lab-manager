@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Assay, Patient, Results, Run, Tech } = require('../../models');
-const passport = require('../../config/passport');
 
 //GET /api/users
 router.get('/', (req, res) => {
@@ -90,7 +89,7 @@ router.post('/login', (req, res) => {
         req.session.user_id = dbTechData.id;
         req.session.username = dbTechData.username;
         req.session.loggedIn = true;
-    
+        
         res.json({ user: dbTechData, message: 'You are now logged in!' });
       });
     });
@@ -106,6 +105,7 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
     //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }

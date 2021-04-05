@@ -3,7 +3,6 @@ const routes = require('./controllers');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const sequelize = require('./config/connection');
-const passport = require('./config/passport');
 const hbs = exphbs.create({});
 const session = require('express-session');
 
@@ -31,8 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
-app.use(passport.initialize());
-app.use(passport.session());
+
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {

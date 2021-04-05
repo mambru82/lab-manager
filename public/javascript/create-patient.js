@@ -18,16 +18,10 @@ async function createPatientFormHandler(event) {
     if (response.ok) {
       document.location.reload();
     } else {
-      /*
-        const notification = encodeURIComponent(
-          "Unable to create patient" + response.statusText
-        );
-        window.location.replace("/create-patient?notification=" + notification);
-        */
       alert(response.statusText);
     }
   }
-  const notification = encodeURIComponent("New patient created succesfully");
+  var notification = encodeURIComponent("New patient created succesfully");
   window.location.replace("/create-patient?notification=" + notification);
 }
 
