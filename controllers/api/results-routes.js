@@ -51,16 +51,16 @@ router.post('/', (req, res) => {
     Results.create({
         patient_id: req.body.patient_id,
         run_id: req.body.run_id,
-        seq_name: req.body.seq_name,
+        seq_name: req.body.seqName,
         clade: req.body.clade,
-        qc_missing_data_score: req.body.qc_missing_data_score,
-        total_missing: req.body.total_missing,
-        missing_data_threshold: req.body.missing_data_threshold,
-        status: req.body.status,
-        overall_score: req.body.overall_score,
-        overall_status: req.body.overall_status,
-        nearest_tree_node_id: req.body.nearest_tree_node_id,
-        errors: req.body.errors
+        qc_missing_data_score: req.body.qc.missingData.score,
+        total_missing: req.body.qc.missingData.totalMissing,
+        missing_data_threshold: req.body.qc.missingData.missingDataThreshold,
+        status: req.body.qc.missingData.status,
+        overall_score: req.body.qc.overallScore,
+        overall_status: req.body.qc.overallStatus,
+        nearest_tree_node_id: req.body.nearestTreeNodeId,
+        errors: req.body.errors[0]
     })
     .then(dbPatientData => res.json(dbPatientData))
     .catch(err => {
@@ -75,15 +75,16 @@ router.put('/:id', (req, res) => {
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     Results.update({
         result_date: sequelize.literal('CURRENT_TIMESTAMP'),
+        seq_name: req.body.seqName,
         clade: req.body.clade,
-        qc_missing_data_score: req.body.qc_missing_data_score,
-        total_missing: req.body.total_missing,
-        missing_data_threshold: req.body.missing_data_threshold,
-        status: req.body.status,
-        overall_score: req.body.overall_score,
-        overall_status: req.body.overall_status,
-        nearest_tree_node_id: req.body.nearest_tree_node_id,
-        errors: req.body.errors
+        qc_missing_data_score: req.body.qc.missingData.score,
+        total_missing: req.body.qc.missingData.totalMissing,
+        missing_data_threshold: req.body.qc.missingData.missingDataThreshold,
+        status: req.body.qc.missingData.status,
+        overall_score: req.body.qc.overallScore,
+        overall_status: req.body.qc.overallStatus,
+        nearest_tree_node_id: req.body.nearestTreeNodeId,
+        errors: req.body.errors[0]
     }, {
         where: {
             id: req.params.id
