@@ -1,6 +1,5 @@
 const Patient = require("../models/Patient");
 const Results = require("../models/Results");
-
 const router = require("express").Router();
 
 router.get("/", (req, res) => {
@@ -24,7 +23,28 @@ router.get("/signup", (req, res) => {
 router.get("/tech-main", (req, res) => {
   const theData = { loggedIn: true }; //>>> Remove once security is set
   res.render("tech-main", theData);
+  Patient.findAll({
+    attributes:[
+      'id',
+      'first_name',
+      'last_name',
+      'dob'
+    ]
+  }).then(dbPatientData => {
+      const patients = dbPatientData.map(patients => patients.get({ plain: true }));
+
+      res.render('tech-main', {
+        patients,
+        loggedIn: true
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
+ // res.render("tech-main", {loggedIn:true});
+//});
 
 router.get("/results", (req, res) => {
   const Op = require("sequelize").Op;
@@ -86,6 +106,7 @@ router.get("/patients", (req, res) => {
       res.status(500).json(err);
     });
 });
+
 
 router.get("/patients/:id", (req, res) => {
   Results.findAll({
@@ -193,6 +214,8 @@ router.get("/create-patient", (req, res) => {
 // data. Resulting analysis is returned as an object
 //==================================================
 function resultsDataAnalysis(results) {
+=======
+function createDataAnalysis(results) {
   var rtnObject = {};
   var len = results.length;
 

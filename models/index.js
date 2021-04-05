@@ -13,16 +13,20 @@ Run.belongsTo(Assay, {
 });
 
 Tech.hasMany(Run, {
-    foreignKey: 'run_id'
+    foreignKey: 'tech_id'
 });
+
+// Tech.hasMany(Assay, {
+//     foreignKey: 'assay_id'
+// });
 
 // Tech.hasMany(Results, {
 //     foreignKeyKey: 'run_id'
 // });
 
-Patient.hasOne(Tech, {
-    foreignKey: 'tech_id'
-});
+// Patient.hasOne(Tech, {
+//     foreignKey: 'tech_id'
+// });
 
 Patient.hasMany(Results, {
     foreignKey: 'patient_id'

@@ -25,6 +25,17 @@ Results.init(
                 key: 'id'
             }
         },
+        //accession date is the date/timestamp on which it is first created
+        accession_date: {
+            type: 'TIMESTAMP',
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+            allowNull: false
+        }, 
+        //result_date is the date/timestamp on which it is updated (the result is uploaded)
+        result_date: {
+            type: 'TIMESTAMP',
+            allowNull: true
+        },
         seq_name: {
             type: DataTypes.STRING,
             allowNull: false
