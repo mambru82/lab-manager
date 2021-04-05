@@ -214,8 +214,6 @@ router.get("/create-patient", (req, res) => {
 // data. Resulting analysis is returned as an object
 //==================================================
 function resultsDataAnalysis(results) {
-=======
-function createDataAnalysis(results) {
   var rtnObject = {};
   var len = results.length;
 
