@@ -7,12 +7,10 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  /*>>> un-comment this once security is ready
   if (req.session.loggedIn) {
     res.redirect("/tech-main");
     return;
   }
-  >>>*/
   res.render("login");
 });
 
@@ -21,7 +19,11 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/tech-main", (req, res) => {
-  const theData = { loggedIn: true }; //>>> Remove once security is set
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
+  const theData = { loggedIn: req.session.loggedIn }; 
   res.render("tech-main", theData);
   Patient.findAll({
     attributes:[
@@ -35,7 +37,7 @@ router.get("/tech-main", (req, res) => {
 
       res.render('tech-main', {
         patients,
-        loggedIn: true
+        loggedIn: req.session.loggedIn
       });
     })
     .catch(err => {
@@ -43,10 +45,11 @@ router.get("/tech-main", (req, res) => {
       res.status(500).json(err);
     });
 });
- // res.render("tech-main", {loggedIn:true});
-//});
 
 router.get("/results", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+  }
   const Op = require("sequelize").Op;
   Results.findAll({
     attributes: ["patient_id", "run_id", "clade", "errors"],
@@ -70,7 +73,7 @@ router.get("/results", (req, res) => {
       res.render("results", {
         results,
         chartdata,
-        loggedIn: true, //>>> Remove once security is set
+        loggedIn: req.session.loggedIn
       });
     })
     .catch((err) => {
@@ -80,6 +83,10 @@ router.get("/results", (req, res) => {
 });
 
 router.get("/patients", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
   console.log(req.query);
   Patient.findAll({
     attributes: ["id", "first_name", "last_name", "dob"],
@@ -98,7 +105,7 @@ router.get("/patients", (req, res) => {
 
       res.render("patients", {
         patients,
-        loggedIn: true, //>>> Remove once security is set
+        loggedIn: req.session.loggedIn
       });
     })
     .catch((err) => {
@@ -109,6 +116,10 @@ router.get("/patients", (req, res) => {
 
 
 router.get("/patients/:id", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
   Results.findAll({
     attributes: [
       "patient_id",
@@ -138,7 +149,7 @@ router.get("/patients/:id", (req, res) => {
       res.render("patients", {
         results,
         viewingPatientResults: true,
-        loggedIn: true, //>>> Remove once security is set
+        loggedIn: req.session.loggedIn
       });
     })
     .catch((err) => {
@@ -148,6 +159,10 @@ router.get("/patients/:id", (req, res) => {
 });
 
 router.get("/run-metrics", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
   const Op = require("sequelize").Op;
   Results.findAll({
     attributes: ["patient_id", "run_id", "clade", "errors"],
@@ -171,7 +186,7 @@ router.get("/run-metrics", (req, res) => {
       res.render("run-metrics", {
         results,
         chartdata,
-        loggedIn: true, //>>> Remove once security is set
+        loggedIn: req.session.loggedIn
       });
     })
     .catch((err) => {
@@ -181,6 +196,10 @@ router.get("/run-metrics", (req, res) => {
 });
 
 router.get("/accession-case", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
   Patient.findAll({
     attributes: ["id", "first_name", "last_name", "dob"],
     order: [["last_name", "DESC"]],
@@ -192,7 +211,7 @@ router.get("/accession-case", (req, res) => {
 
       res.render("accession-case", {
         patients,
-        loggedIn: true, //>>> Remove once security is set
+        loggedIn: req.session.loggedIn,
         notification: req.query.notification,
       });
     })
@@ -203,9 +222,13 @@ router.get("/accession-case", (req, res) => {
 });
 
 router.get("/create-patient", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
   res.render("create-patient",{
     notification: req.query.notification,
-    loggedIn: true, //>>> Remove once security is set
+    loggedIn: req.session.loggedIn
   });
 });
 

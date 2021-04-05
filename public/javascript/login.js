@@ -5,8 +5,8 @@ async function loginFormHandler(event) {
 
   //>>> =====================================
   //>>> DELETE- ONLY FOR TESTING
-  document.location.replace("/run-metrics");
-  return;
+  // document.location.replace("/run-metrics");
+  // return;
   //>>> =====================================
 
   const username = document.querySelector("#username-login").value.trim();
