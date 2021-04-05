@@ -4,6 +4,7 @@ const { Tech } = require('../models/Tech')
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
+    console.log('in passport')
     Tech.findOne({ username: username }, (err, tech) => {
       if (err) { return done(err); }
       if (!tech) {

@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
     })
 });
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/tech-main' }), (req, res) => {
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
     // expects {email: 'lernantino@gmail.com', password: 'password1234'}
     Tech.findOne({
       where: {
@@ -90,7 +90,7 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
         req.session.user_id = dbTechData.id;
         req.session.username = dbTechData.username;
         req.session.loggedIn = true;
-    
+        
         res.json({ user: dbTechData, message: 'You are now logged in!' });
       });
     });
