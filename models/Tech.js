@@ -30,6 +30,7 @@ Tech.init(
         },
         assay_id: {
             type: DataTypes.INTEGER,
+            defaultValue: 1,
             references: {
                 model: "assay",
                 key: "id"
