@@ -43,7 +43,7 @@ Tech.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [4]
+                len: [8, 32]
             }
         }
     },
