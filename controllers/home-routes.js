@@ -221,6 +221,8 @@ router.get("/accession-case", (req, res) => {
     });
 });
 
+router.get("/enter-results", )
+
 router.get("/create-patient", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');
