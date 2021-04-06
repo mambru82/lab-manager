@@ -154,6 +154,45 @@ router.get("/patients/:id", (req, res) => {
     });
 });
 
+router.get("/results/:id", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
+  Results.findAll({
+    attributes: [
+      "id",
+      "patient_id",
+      "seq_name",
+      "accession_date",
+    ],
+    order: [["id"]],
+    where: {
+      id: req.params.id,
+    },
+    include: [
+      {
+        model: Patient,
+        attributes: ["first_name", "last_name"],
+      },
+    ],
+  })
+    .then((dbResultsData) => {
+      const results = dbResultsData.map((results) =>
+        results.get({ plain: true })
+      );
+      res.render("submit-results", {
+        results,
+        viewingPatientResults: true,
+        loggedIn: req.session.loggedIn
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 router.get("/run-metrics", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');
@@ -216,6 +255,48 @@ router.get("/accession-case", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+router.get("/enter-results", (req, res) => {
+  if(!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
+  const Op = require("sequelize").Op;
+  Results.findAll({
+    attributes: [
+        "id", 
+        "clade", 
+        "accession_date", 
+        "result_date", 
+        "run_id", 
+        "seq_name"],
+    order: [["accession_date"]],
+    where: {
+      result_date: { [Op.eq]: null },
+    },
+    include: [
+      {
+        model: Patient,
+        attributes: ["id", "first_name", "last_name"]
+      }
+    ]
+  })
+  .then((dbResultsData) => {
+    const results = dbResultsData.map((results) => 
+    results.get( { plain: true })
+    );
+
+    res.render("enter-results", {
+      results,
+      loggedIn: req.session.loggedIn,
+      notification: req.query.notification
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  })
+})
 
 router.get("/create-patient", (req, res) => {
   if (!req.session.loggedIn) {
