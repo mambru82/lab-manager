@@ -1,10 +1,8 @@
-async function accessionFormHandler(event) {
-    console.log(event);
-    
+async function accessionFormHandler(event) {   
     patient_id = document.getElementById("patient").value.trim();
     seq_name = document.querySelector("#seq_name").value.trim();
      if (seq_name) {
-       const response = await fetch("/api/results", {
+       const response = await fetch("/api/results/accession", {
          method: "POST",
          body: JSON.stringify({
            patient_id,

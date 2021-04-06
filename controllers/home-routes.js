@@ -7,17 +7,13 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect("/tech-main");
-    return;
-  }
   res.render("login");
 });
 
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
-
+/*
 router.get("/tech-main", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');
@@ -45,7 +41,7 @@ router.get("/tech-main", (req, res) => {
       res.status(500).json(err);
     });
 });
-
+*/
 router.get("/results", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');
