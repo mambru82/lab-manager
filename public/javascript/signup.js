@@ -23,8 +23,12 @@ async function signupFormHandler(event) {
     if (response.ok) {
       console.log("success");
       document.location.replace("/run-metrics");
-    } else {
-      alert(response.statusText);
+    } else if (response.status === 422) {
+      // console.log(response)
+      var error = document.getElementById("error")
+      // Changing HTML to draw attention
+      error.innerHTML = "<span style='color: red;'>"+
+                        "Password must be between 8-32 characters in length</span>"
     }
   }
 }

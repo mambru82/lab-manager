@@ -56,6 +56,8 @@ router.post('/', (req, res) => {
         password: req.body.password
     })
     .then(dbTechData => {
+      console.log(dbTechData)
+      
         req.session.save(() => {
             req.session.user_id = dbTechData.id;
             req.session.username = dbTechData.username;
@@ -63,6 +65,21 @@ router.post('/', (req, res) => {
 
             res.json(dbTechData);
         })
+    })
+    .catch(err => {
+      if (err.name === 'SequelizeValidationError') {
+        var message = err.errors.map(e => e.message).toString();
+        // const error = document.getElementById('error');
+
+        // error.innerHTML= "<span style='color: red;'>"+message+"</span>"
+        res.status(422).json({ 
+          success: false,
+          msg: message
+        })
+      } else {
+        console.log(err);
+        res.status(500).json(err);
+      }
     })
 });
 
@@ -74,7 +91,7 @@ router.post('/login', (req, res) => {
       }
     }).then(dbTechData => {
       if (!dbTechData) {
-        res.status(400).json({ message: 'No user with that username identified!' });
+        res.status(401).json({ message: 'No user with that username identified!' });
         return;
       }
   
