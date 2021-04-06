@@ -1,11 +1,10 @@
 
 
-
-{{#if viewingPatientResults}}
     {{#if results.length}}
         <p>Results for patient: {{results.[0].patient.first_name}} {{results.[0].patient.last_name}}</p>
         <table id="patients-table" border="1">
         <tr>
+            <th>result_id</th>
             <th>patient</th>
             <th>run_id</th>
             <th>accession_date</th>
@@ -13,6 +12,7 @@
         </tr>
         {{#each results as |item|}}
         <tr>
+            <td id="result_id">{{id}}</td>
             <td>{{item.patient.first_name}} {{item.patient.last_name}}</td>
             <td>{{item.run_id}}</td>
             <td>{{item.accession_date}}</td>
@@ -21,27 +21,12 @@
         {{/each}}
         </table>
         <form class="submit-results-form">
-            <label for="results">Copy/Paste JSON results below:</label><br>
+            <label for="new_results">Please enter JSON results below:</label><br>
             <input type="text" id="new_results" name="new_results"><br>
-
-            <input type="submit">  
+            <input type="submit">
         </form>
     {{else}}
         <p>This patient has no records.</p>
     {{/if}}
-{{else}}
-    <p>List of patients</p>
-    <table id="patients-table">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>DOB</th>
-            <th>&nbsp;</th>
-            
-        </tr>
-        {{#each patients as |patient|}}
-            {{> patient-info patient }}
-        {{/each}}
-    </table>
-{{/if}}
+
 <script src="/javascript/submit-results.js"></script>
