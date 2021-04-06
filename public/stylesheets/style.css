@@ -66,7 +66,7 @@ body {
 /* Essential CSS - Makes the effect work */
 
 body {
-  background-color: #34e2d9;
+  background-color: #000000;
 }
 
 .bubbles {
@@ -458,4 +458,8 @@ body {
 }
 .imgHeight{
   height: 70vh;
+}
+
+.login-form {
+  margin-left:512px;
 }
