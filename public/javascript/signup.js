@@ -1,16 +1,20 @@
 async function signupFormHandler(event) {
   event.preventDefault();
 
+  const firstname = document.querySelector("#firstname-signup").value.trim();
+  const lastname = document.querySelector("#lastname-signup").value.trim();
+  const supervisor = document.querySelector("#supervisor-signup").value.trim();
   const username = document.querySelector("#username-signup").value.trim();
-  const email = document.querySelector("#email-signup").value.trim();
   const password = document.querySelector("#password-signup").value.trim();
 
-  if (username && email && password) {
+  if (firstname && lastname && supervisor && username && password ) {
     const response = await fetch("/api/techs", {
       method: "post",
       body: JSON.stringify({
+        firstname,
+        lastname,
+        supervisor,
         username,
-        email,
         password,
       }),
       headers: { "Content-Type": "application/json" },
@@ -18,6 +22,7 @@ async function signupFormHandler(event) {
     // check the response status
     if (response.ok) {
       console.log("success");
+      document.location.replace("/run-metrics");
     } else {
       alert(response.statusText);
     }

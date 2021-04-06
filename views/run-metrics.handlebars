@@ -1,0 +1,89 @@
+<h2>Run Metrics - Error Rate as Percentage</h2>
+{{log "variable results: " results}}
+{{log "variable chartdata: " chartdata}}
+
+<!-- Styles -->
+<style>
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+</style>
+
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+// Add data
+chart.data = [
+            {{#each chartdata.error_rates as | item |}}
+            {  
+                "run": "{{item.[0]}}", 
+                "error_rate": {{item.[2]}}*100
+            },
+            {{/each}}
+];
+
+// Create axes
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "run";
+categoryAxis.title.text = "Run Id";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.minGridDistance = 30;
+
+categoryAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
+  if (target.dataItem && target.dataItem.index & 2 == 2) {
+    return dy + 25;
+  }
+  return dy;
+});
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.title.text = "Error Rate (%)";
+// Create series
+var series = chart.series.push(new am4charts.ColumnSeries());
+series.dataFields.valueY = "error_rate";
+series.dataFields.categoryX = "run";
+series.name = "error_rate";
+series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+series.columns.template.fillOpacity = .8;
+
+var columnTemplate = series.columns.template;
+columnTemplate.strokeWidth = 2;
+columnTemplate.strokeOpacity = 1;
+
+}); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>
+<hr>
+
+<table id="error-rates-table" border="1"><tr>
+    <th>Run Id</th>
+    <th>Total Errors</th>
+    <th>Total tests</th>
+    <th>Error Rate</th>
+    </tr>
+    {{#each chartdata.error_rates as |item|}}
+    <tr>
+      <td>{{item.[0]}}</td>
+      <td>{{item.[1]}}</td>
+      <td>{{item.[3]}}</td>
+      <td>{{item.[2]}}</td>
+    </tr>
+    {{/each}}
+</table>  
