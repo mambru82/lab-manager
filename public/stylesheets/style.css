@@ -200,12 +200,12 @@ body {
 */
 @keyframes shine {
   0% {
-    color: #6b1839;
+    color: #c02d68;
     text-shadow: none;
   }
   100% {
     color: #ffe6ff;
-    text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff6565,
+    text-shadow: 0 0 0.6rem #86f121, 0 0 1.5rem #ff6565,
       -0.2rem 0.1rem 1rem #65a8ff, 0.2rem 0.1rem 1rem #fff065,
       0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #24ff5b;
   }
