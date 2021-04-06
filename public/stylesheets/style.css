@@ -66,7 +66,7 @@ body {
 /* Essential CSS - Makes the effect work */
 
 body {
-  background-color: #3d8ec4;
+  background-color: #34e2d9;
 }
 
 .bubbles {
@@ -340,49 +340,54 @@ body {
   width: 200px;
   height: auto;
   position: absolute;
-  left:90%;
-  margin-left: -100px;
+  /* left:90%; */
+  margin-left: 40px;
   border-bottom: 100px;
+  margin-bottom: 70px;
 }
 .mo-fire-2 {
   width: 200px;
   height: auto;
   position: absolute;
-  left:70%;
-  margin-left: -100px;
+  /* left:70%; */
+  margin-left: 40px;
   border-bottom: 100px;
+  margin-bottom: 70px;
 }
 .mo-fire-3 {
   width: 200px;
   height: auto;
   position: absolute;
-  left:50%;
-  margin-left: -100px;
+  /* left:50%; */
+  margin-left: 40px;
   border-bottom: 100px;
+  margin-bottom: 70px;
 }
 .mo-fire-4 {
   width: 200px;
   height: auto;
   position: absolute;
-  left:30%;
-  margin-left: -100px;
+  /* left:30%; */
+  margin-left:40px;
   border-bottom: 100px;
+  margin-bottom: 70px;
 }
 
 .mo-fire {
   width: 200px;
   height: auto;
   position: absolute;
-  left:10%;
-  margin-left: -100px;
+  /* left:10%; */
+  margin-left: 40px;
   border-bottom: 100px;
+  margin-bottom: 70px;
 }
 
-.mo-fire svg {
+/* .mo-fire svg {
   width: 100%;
   
   position: relative
-}
+} */
 
 
 /*.mo-fire-4 svg {
@@ -450,4 +455,7 @@ body {
     transform: translate(-20px, -100px) rotate(180deg);
     opacity: 0;
   }
+}
+.imgHeight{
+  height: 70vh;
 }
