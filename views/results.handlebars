@@ -1,0 +1,88 @@
+
+<h2>Results Summary </h2>
+
+<!-- Styles -->
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+    }
+</style>
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/material.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+<!-- Chart code -->
+<script>
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_material);
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        // Create chart instance
+        var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+        // Add data
+        chart.data = [
+            {{#each chartdata.clade_count_pairs as | item |}}
+            {  
+                "clade": "{{item.[0]}}", 
+                "count": {{item.[1]}}
+            },
+            {{/each}}
+       ];
+
+        // Add and configure Series
+        var pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "count";
+        pieSeries.dataFields.category = "clade";
+        pieSeries.slices.template.stroke = am4core.color("#fff");
+        pieSeries.slices.template.strokeWidth = 2;
+        pieSeries.slices.template.strokeOpacity = 1;
+
+        // This creates initial animation
+        pieSeries.hiddenState.properties.opacity = 1;
+        pieSeries.hiddenState.properties.endAngle = -90;
+        pieSeries.hiddenState.properties.startAngle = -90;
+
+    }); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+<div>
+    <div id="chartdiv" background="white"></div>
+    <div>
+        <table id="results-summary-table" border="1">
+            <th>Clade</th>
+            <th>Count</th>
+            </tr>
+            {{#each chartdata.clade_count_pairs as | item |}}
+            <tr>
+                <td>{{item.[0]}}</td>
+                <td>{{item.[1]}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>
+
+
+<br>
+<br>
+<!--
+<table id="results-table" border="1"><tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>run_id</th>
+    <th>clade</th>
+    </tr>
+    {{#each results as |result|}}
+    {{> results-info result }}
+    {{/each}}
+</table>
+-->

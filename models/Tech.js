@@ -1,7 +1,12 @@
-const {Model, DataTypes} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Tech extends Model {}
+class Tech extends Model {
+    checkPassword(loginPw) {
+        return bcrypt.compareSync(loginPw, this.password)
+    }
+}
 
 Tech.init(
     {
@@ -25,6 +30,7 @@ Tech.init(
         },
         assay_id: {
             type: DataTypes.INTEGER,
+            defaultValue: 1,
             references: {
                 model: "assay",
                 key: "id"
@@ -38,7 +44,7 @@ Tech.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [4]
+                len: [8, 32]
             }
         }
     },
@@ -46,16 +52,15 @@ Tech.init(
         hooks: {
             async beforeCreate(newTechData) {
                 newTechData.password = await bcrypt.hash(newTechData.password, 10)
-                return newUserData
+                return newTechData;
             },
 
             async beforeUpdate(updatedTechData) {
                 updatedTechData.password = await bcrypt.hash(updatedTechData.password, 10);
                 return updatedTechData;
             }
-        }
-    },
-    {
+        },
+    
         sequelize,
         timestamps: false,
         freezeTableName: true,
