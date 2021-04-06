@@ -1,49 +1,30 @@
 
-
-
-{{#if viewingPatientResults}}
     {{#if results.length}}
-        <p>Results for patient: {{results.[0].patient.first_name}} {{results.[0].patient.last_name}}</p>
+        <p>List of pending results</p>
         <table id="patients-table" border="1">
         <tr>
+            <th>result id</th>
             <th>patient</th>
             <th>run_id</th>
             <th>seq_name</th>
             <th>clade</th>
-            <th>overall_score</th>
-            <th>overall_status</th>
-            <th>errors</th>
+            <th>accession date</th>
+            <th>result date</th>
+            <th>&nbsp;</th>
         </tr>
         {{#each results as |item|}}
         <tr>
+            <td>{{item.id}}</td>
             <td>{{item.patient.first_name}} {{item.patient.last_name}}</td>
             <td>{{item.run_id}}</td>
             <td>{{item.seq_name}}</td>
             <td>{{item.clade}}</td>
-            <td>{{item.overall_score}}</td>
-            <td>{{item.overall_status}}</td>
-            <td>{{item.errors}}</td>
-        </tr>
+            <td>{{item.accession_date}}</td>
+            <td>{{item.result_date}}</td>
+            <td><button id="enter-results-{{item.id}}" value="{{item.id}}" class="btn-enter-results">Enter results</button></td>
+         </tr>
         {{/each}}
         </table>
     {{else}}
-        <p>This patient has no records.</p>
+        <p>There are no pending results!</p>
     {{/if}}
-{{else}}
-    <p>List of patients</p>
-    <table id="patients-table">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>DOB</th>
-            <th>&nbsp;</th>
-            
-        </tr>
-        {{#each patients as |patient|}}
-            {{> patient-info patient }}
-        {{/each}}
-    </table>
-{{/if}}
-
-
-<script src="/javascript/patient-info.js"></script>
