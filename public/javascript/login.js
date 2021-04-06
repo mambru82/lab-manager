@@ -11,6 +11,10 @@ async function loginFormHandler(event) {
 
   const username = document.querySelector("#username-login").value.trim();
   const password = document.querySelector("#password-login").value.trim();
+  const errorPswd = document.getElementById("error-password");
+  const errorUser = document.getElementById("error-username");
+  errorPswd.innerHTML = "";
+  errorUser.innerHTML = "";
 
   if (username && password) {
     const response = await fetch("/api/techs/login", {
@@ -29,16 +33,18 @@ async function loginFormHandler(event) {
         // console.log(response)
         var error = document.getElementById("error-password")
         // Changing HTML to draw attention
-        error.innerHTML = "<span style='color: red;'>"+
-                          "Incorrect password. Please try again!</span>"
+        errorPswd.innerHTML =
+          "<span style='color: red;'>" +
+          "Incorrect password. Please try again!</span>";
       }
 
       if (response.status === 401) {
         // console.log(response)
         var error = document.getElementById("error-username")
         // Changing HTML to draw attention
-        error.innerHTML = "<span style='color: red;'>"+
-                          "Incorrect username. Please try again!</span>"
+        errorUser.innerHTML =
+          "<span style='color: red;'>" +
+          "Incorrect username. Please try again!</span>";
       }
     }
   }

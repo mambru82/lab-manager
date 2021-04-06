@@ -6,7 +6,8 @@ async function signupFormHandler(event) {
   const supervisor = document.querySelector("#supervisor-signup").value.trim();
   const username = document.querySelector("#username-signup").value.trim();
   const password = document.querySelector("#password-signup").value.trim();
-
+  const errorPswd = document.getElementById("error");
+  errorPswd.innerHTML = "";
   if (firstname && lastname && supervisor && username && password ) {
     const response = await fetch("/api/techs", {
       method: "post",
@@ -24,10 +25,8 @@ async function signupFormHandler(event) {
       console.log("success");
       document.location.replace("/run-metrics");
     } else if (response.status === 422) {
-      // console.log(response)
-      var error = document.getElementById("error")
       // Changing HTML to draw attention
-      error.innerHTML = "<span style='color: red;'>"+
+      errorPswd.innerHTML = "<span style='color: red;'>"+
                         "Password must be between 8-32 characters in length</span>"
     }
   }
