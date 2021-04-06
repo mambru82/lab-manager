@@ -66,7 +66,7 @@ body {
 /* Essential CSS - Makes the effect work */
 
 body {
-  background-color: #5808da;
+  background-color: #3d8ec4;
 }
 
 .bubbles {
@@ -95,7 +95,7 @@ body {
   height: 100px;
   color: rgb(0, 81, 255);
   animation-name: example;
-  animation-duration: 3s;
+  animation-duration: 2.5s;
 }
 
 @keyframes example {
