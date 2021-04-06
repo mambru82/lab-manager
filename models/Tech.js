@@ -38,13 +38,17 @@ Tech.init(
         },
         username: {
             type: DataTypes.STRING,
+            unique: true,
             allowNull: false
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [8, 32]
+                len: {
+                    args: [8, 32],
+                    msg: 'Password must be between 8-32 characters in length'
+                }
             }
         }
     },

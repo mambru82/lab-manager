@@ -1,0 +1,32 @@
+
+    {{#if results.length}}
+        <p>List of pending results</p>
+        <table id="patients-table" border="1">
+        <tr>
+            <th>result id</th>
+            <th>patient</th>
+            <th>run_id</th>
+            <th>seq_name</th>
+            <th>clade</th>
+            <th>accession date</th>
+            <th>result date</th>
+            <th>&nbsp;</th>
+        </tr>
+        {{#each results as |item|}}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.patient.first_name}} {{item.patient.last_name}}</td>
+            <td>{{item.run_id}}</td>
+            <td>{{item.seq_name}}</td>
+            <td>{{item.clade}}</td>
+            <td>{{item.accession_date}}</td>
+            <td>{{item.result_date}}</td>
+            <td><button id="enter-results-{{item.id}}" value="{{item.id}}" class="btn-enter-results">Enter results</button></td>
+         </tr>
+        {{/each}}
+        </table>
+    {{else}}
+        <p>There are no pending results!</p>
+    {{/if}}
+
+    <script src="/javascript/select-results.js"></script>
