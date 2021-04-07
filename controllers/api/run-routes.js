@@ -4,6 +4,9 @@ const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
 //pull a patient list for all patients
 router.get('/', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../login');
+  }
     Run.findAll({
 
         order: [['id']],
@@ -27,6 +30,9 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../login');
+  }
     Run.create({
         assay_id: req.body.patient_id,
         tech_id: req.body.run_id,
@@ -39,6 +45,9 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../../login');
+  }
     Results.destroy({
         where: {
             id: req.params.id

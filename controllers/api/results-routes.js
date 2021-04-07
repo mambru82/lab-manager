@@ -4,6 +4,9 @@ const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
 //pull a patient list for all patients
 router.get('/', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../login');
+  }
     Results.findAll({
 
         order: [['id']],
@@ -22,6 +25,9 @@ router.get('/', (req, res) => {
 
 })
 router.get('/:id', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../../login');
+  }
     Results.findOne({
         order: [['id']],
         include: [
@@ -47,6 +53,9 @@ router.get('/:id', (req, res) => {
     })
 })
 router.post('/', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../login');
+  }
     console.log(req);
     Results.create({
         patient_id: req.body.patient_id,
@@ -70,6 +79,9 @@ router.post('/', (req, res) => {
 });
 
 router.post("/accession", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../../login');
+  }
   console.log(req);
   Results.create({
     patient_id: req.body.patient_id,
@@ -93,6 +105,9 @@ router.post("/accession", (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../../login');
+  }
     //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
 
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
@@ -128,6 +143,9 @@ router.put('/:id', (req, res) => {
 
 
 router.delete('/:id', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../../login');
+  }
     Results.destroy({
         where: {
             id: req.params.id
