@@ -1,12 +1,9 @@
 /* @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900); */
 
-body {
-  background-color: rgb(0, 0, 0);
-}
 
 .fa,
 .fas {
-  color: red;
+  color: rgb(247, 109, 109);
   font-weight: 900;
 }
 
@@ -67,6 +64,7 @@ body {
 
 body {
   background-color: #000000;
+ 
 }
 
 .bubbles {
@@ -200,12 +198,12 @@ body {
 */
 @keyframes shine {
   0% {
-    color: #6b1839;
+    color: #c02d68;
     text-shadow: none;
   }
   100% {
     color: #ffe6ff;
-    text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff6565,
+    text-shadow: 0 0 0.6rem #86f121, 0 0 1.5rem #ff6565,
       -0.2rem 0.1rem 1rem #65a8ff, 0.2rem 0.1rem 1rem #fff065,
       0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #24ff5b;
   }
@@ -462,4 +460,40 @@ body {
 
 .login-form {
   margin-left:512px;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #20bdf1;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.container:hover .overlay {
+  width: 100%;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+.form-check-label{
+  color: white;
 }

@@ -2,29 +2,29 @@
     <div class="row">
         <form class="row g-3">
             <div class="col-md-4">
-                <label for="validationDefault01" class="form-label">First name</label>
-                <input type="text" class="form-control" id="validationDefault01" value="Mark" required>
+                <label for="firstname-signup" class="form-label"></label>
+                <input type="text" placeholder="First name" class="form-control" id="firstname-signup" value="" required>
             </div>
             <div class="col-md-4">
-                <label for="validationDefault02" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="validationDefault02" value="Otto" required>
+                <label for="lastname-signup" class="form-label"></label>
+                <input type="text" placeholder="Last name" class="form-control" id="lastname-signup" value="" required>
             </div>
             <div class="col-md-4">
-                <label for="validationDefaultUsername" class="form-label">Username</label>
+                <label for="usernam-signup" class="form-label"></label>
                 <div class="input-group">
                     <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                    <input type="text" class="form-control" id="validationDefaultUsername"
+                    <input type="text" placeholder="Username" class="form-control" id="username-signup"
                         aria-describedby="inputGroupPrepend2" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="validationDefault03" class="form-label">Supervisor</label>
-                <input type="text" class="form-control" id="validationDefault03" required>
+                <label for="supervisor-signup" class="form-label"></label>
+                <input type="text" placeholder="Supervisor" class="form-control" id="supervisor-signup" required>
             </div>
             
             <div class="col-md-3">
-                <label for="validationDefault05" class="form-label">Password</label>
-                <input type="text" class="form-control" id="validationDefault05" required>
+                <label for="password-signup" class="form-label"></label>
+                <input type="password" placeholder="Password" class="form-control" id="password-signup" required>
             </div>
             <div class="col-12">
                 <div class="form-check">
@@ -42,8 +42,8 @@
 </div>
 
 
-// Plugged in code for the javascript 
-<form class="signup-form">
+<!--// Plugged in code for the javascript -->
+{{!-- <form class="signup-form">
     <div>
         <label for="firstname-signup">First name: </label>
         <input type="text" id="firstname-signup" />
@@ -68,6 +68,6 @@
     <div>
         <button type="submit">signup</button>
     </div>
-</form>
+</form> --}}
 
 <script src="/javascript/signup.js"></script>
