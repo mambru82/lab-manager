@@ -537,7 +537,7 @@ body {
     font-size: 3em;
   }
 }
-@media screen and (max-width: 701px) {
+@media screen and (max-width: 718px) {
   .sign {
     font-size: 2em;
   }
