@@ -1,25 +1,23 @@
 /* @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900); */
 
-
 .fa,
 .fas {
   color: rgb(247, 109, 109);
   font-weight: 900;
 }
 
-
 .nav-link {
   animation-name: examples;
   animation-duration: 30s;
 }
 .btn-primary {
-color: #fff;
-background-color: rgba(252, 13, 13, 0);
-border-color: rgba(13, 110, 252, 0);
-animation-name: examples;
+  color: #fff;
+  background-color: rgba(252, 13, 13, 0);
+  border-color: rgba(13, 110, 252, 0);
+  animation-name: examples;
   animation-duration: 30s;
 }
-@keyframes examples  {
+@keyframes examples {
   0% {
     color: red;
   }
@@ -65,7 +63,6 @@ body {
 body {
   background-color: #000000;
   color: rgb(247, 240, 240);
- 
 }
 
 .bubbles {
@@ -106,7 +103,6 @@ body {
   }
   50% {
     background-color: rgb(255, 0, 242);
-
   }
   75% {
     background-color: blue;
@@ -126,10 +122,10 @@ body {
   color: rgba(12, 118, 159, 0);
   z-index: 2;
 }
-@font-face {
+/* @font-face {
   font-family: Clip;
   src: url("https://acupoftee.github.io/fonts/Clip.ttf");
-}
+} */
 
 /*body {
   background-color: #141114;
@@ -367,7 +363,7 @@ body {
   height: auto;
   position: absolute;
   /* left:30%; */
-  margin-left:40px;
+  margin-left: 40px;
   border-bottom: 100px;
   margin-bottom: 70px;
 }
@@ -388,7 +384,6 @@ body {
   position: relative
 } */
 
-
 /*.mo-fire-4 svg {
   width: 100%;
   height: auto;
@@ -407,7 +402,7 @@ body {
   animation-delay: 1s;
   animation-duration: 3s;
 }
-.flame3.two{
+.flame3.two {
   animation-duration: 5s;
   animation-delay: 1s;
 }
@@ -440,27 +435,27 @@ body {
 }
 @keyframes flameWobble {
   50% {
-    transform: scale(1,1.2) translate(0, -30px) rotate(-2deg);
+    transform: scale(1, 1.2) translate(0, -30px) rotate(-2deg);
   }
 }
 @keyframes flamefly {
-  0%{
+  0% {
     transform: translate(0) rotate(180deg);
   }
-   50% {
-     opacity: 1;
+  50% {
+    opacity: 1;
   }
   100% {
     transform: translate(-20px, -100px) rotate(180deg);
     opacity: 0;
   }
 }
-.imgHeight{
+.imgHeight {
   height: 70vh;
 }
 
 .login-form {
-  margin-left:512px;
+  margin-left: 512px;
 }
 .image {
   display: block;
@@ -477,7 +472,7 @@ body {
   overflow: hidden;
   width: 0;
   height: 100%;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
 .container:hover .overlay {
@@ -495,35 +490,33 @@ body {
   transform: translate(-50%, -50%);
   white-space: nowrap;
 }
-.form-check-label{
+.form-check-label {
   color: white;
 }
 
-.centerText{
+.centerText {
   text-align: center;
   color: white;
 }
 
-#chartdiv{
+#chartdiv {
   background-color: white;
 }
 #error-rates-table {
   margin-left: 512px;
 }
-#results-summary-table{
-  margin-left: 512px;
-}
+
 .table {
-  --bs-table-bg: #da1595cf;
-  --bs-table-striped-color: #1010f3;
-  --bs-table-striped-bg: rgb(211 58 228 / 54%);
+  --bs-table-bg: #5d5e5ecf;
+  --bs-table-striped-color: #ffffff;
+  --bs-table-striped-bg: rgba(12, 12, 12, 0.54);
   --bs-table-active-color: #22e2f3;
-  --bs-table-active-bg: rgb(228 25 25);
+  --bs-table-active-bg: rgb(228, 25, 25);
   --bs-table-hover-color: #0bf525;
-  --bs-table-hover-bg: rgb(243 6 6);
+  --bs-table-hover-bg: rgb(175, 73, 6);
   width: 100%;
   margin-bottom: 1rem;
-  color: #37efc5;
+  color: #ffffff;
   vertical-align: top;
   border-color: #d454d3;
   animation-name: example;
