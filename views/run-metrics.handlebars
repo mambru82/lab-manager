@@ -28,12 +28,12 @@
       var chart = am4core.create("chartdiv", am4charts.XYChart);
 
       // Add data
-      chart.data = [{{#each chartdata.error_rates as | item |}}
+      chart.data = [{{ #each chartdata.error_rates as | item |}}
             {
         "run": "{{item.[0]}}",
-        "error_rate": {{item.[2] }}* 100
+        "error_rate": {{ item.[2] }}* 100
             },
-      {{/each}}];
+      {{/ each}}];
 
     // Create axes
     var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -64,7 +64,7 @@
     columnTemplate.strokeOpacity = 1;
 
 }); // end am4core.ready()
-</script>
+  </script>
 
 
 
@@ -89,6 +89,6 @@
 
       </tr>
       {{/each}}
-      </table>
-     </div>
+    </table>
+  </div>
 </div>

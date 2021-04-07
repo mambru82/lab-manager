@@ -8,17 +8,17 @@
 </style>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lab Manager</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Manager</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-  <script type="text/javascript"
-    src="https://s3.amazonaws.com/codecademy-content/courses/hour-of-code/js/alphabet.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript"
+        src="https://s3.amazonaws.com/codecademy-content/courses/hour-of-code/js/alphabet.js"></script>
 </head>
 
 <body>
@@ -51,7 +51,7 @@
                 <a class="nav-link" href="/results">Results Summary</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/accession-case" >Accession Case</a>
+                <a class="nav-link" href="/accession-case">Accession Case</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/create-patient">Create Patient</a>
@@ -59,8 +59,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="/enter-results">Enter Results</a>
             </li>
-         
-          
+
+
         </ul>
         {{!-- <div>
             <hr>
@@ -88,19 +88,12 @@
     </div>
 
 
-    </div>
+
+
+
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
     {{/if}}
-    <main>
-      {{{ body }}}
-    </main>
-
-  </div>
-
-
-  </div>
-  {{#if loggedIn}}
-  <script src="/javascript/logout.js"></script>
-  {{/if}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
