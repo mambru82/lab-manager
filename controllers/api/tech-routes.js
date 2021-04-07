@@ -4,6 +4,9 @@ const { Assay, Patient, Results, Run, Tech } = require('../../models');
 
 //GET /api/users
 router.get('/', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../login');
+  }
     // Access our User model and run .findAll() method
     Tech.findAll({
         attributes: {exclude: ['password']}
@@ -17,6 +20,9 @@ router.get('/', (req, res) => {
 
 // GET /api/users/1
 router.get('/:id', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../../login');
+  }
     Tech.findOne({
         attributes: { 
             exclude: ['password'],
@@ -67,12 +73,10 @@ router.post('/', (req, res) => {
         })
     })
     .catch(err => {
+      // checks for valid password and sends message to user if password invalid
       if (err.name === 'SequelizeValidationError') {
         var message = err.errors.map(e => e.message).toString();
-        // const error = document.getElementById('error');
-
-        // error.innerHTML= "<span style='color: red;'>"+message+"</span>"
-        res.status(422).json({ 
+          res.status(422).json({ 
           success: false,
           msg: message
         })
@@ -156,6 +160,9 @@ router.put('/:id', (req, res) => {
 
 // DELETE /api/users/1
 router.delete('/:id', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('../../login');
+  }
     Tech.destroy ({
         where: {
             id: req.params.id

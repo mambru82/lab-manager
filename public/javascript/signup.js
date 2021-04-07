@@ -8,6 +8,7 @@ async function signupFormHandler(event) {
   const password = document.querySelector("#password-signup").value.trim();
   const errorPswd = document.getElementById("error");
   errorPswd.innerHTML = "";
+  
   if (firstname && lastname && supervisor && username && password ) {
     const response = await fetch("/api/techs", {
       method: "post",

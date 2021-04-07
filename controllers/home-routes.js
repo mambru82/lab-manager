@@ -113,7 +113,7 @@ router.get("/patients", (req, res) => {
 
 router.get("/patients/:id", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('login');
+    res.redirect('../login');
     return;
   }
   Results.findAll({
@@ -156,7 +156,7 @@ router.get("/patients/:id", (req, res) => {
 
 router.get("/results/:id", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('login');
+    res.redirect('../login');
     return;
   }
   Results.findAll({
