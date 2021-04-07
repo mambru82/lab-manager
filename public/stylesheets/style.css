@@ -64,6 +64,7 @@ body {
 
 body {
   background-color: #000000;
+  color: rgb(247, 240, 240);
  
 }
 
@@ -497,3 +498,19 @@ body {
 .form-check-label{
   color: white;
 }
+
+.centerText{
+  text-align: center;
+  color: white;
+}
+
+#chartdiv{
+  background-color: white;
+}
+#error-rates-table {
+  margin-left: 512px;
+}
+#results-summary-table{
+  margin-left: 512px;
+}
+
