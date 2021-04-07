@@ -1,4 +1,7 @@
-<h2>Run Metrics - Error Rate as Percentage</h2>
+
+<div class="container">
+
+<h2 class="centerText">Run Metrics - Error Rate as Percentage</h2>
 {{log "variable results: " results}}
 {{log "variable chartdata: " chartdata}}
 
@@ -69,10 +72,17 @@ columnTemplate.strokeOpacity = 1;
 </script>
 
 <!-- HTML -->
+
 <div id="chartdiv"></div>
 <hr>
+<div class="container centerText">
 
-<table id="error-rates-table" border="1"><tr>
+<div class="row justify-content-center">
+  <div class="col-sm-12">
+
+  </div>
+</div>
+<table class="" id="error-rates-table" border="1"><tr>
     <th>Run Id</th>
     <th>Total Errors</th>
     <th>Total tests</th>
@@ -87,3 +97,5 @@ columnTemplate.strokeOpacity = 1;
     </tr>
     {{/each}}
 </table>  
+</div>
+</div>
