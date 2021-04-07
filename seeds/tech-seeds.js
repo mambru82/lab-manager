@@ -6,7 +6,7 @@ const techData = [
         last_name: 'Grey',
         supervisor: 'Derek Shepherd',
         username: 'elegante',
-        password: '1234',
+        password: '12345678',
         assay_id: '1'
     },
     {
@@ -14,7 +14,7 @@ const techData = [
         last_name: 'Yang',
         supervisor: 'Derek Shepherd',
         username: 'elegante2',
-        password: '1234',
+        password: '12345678',
         assay_id: '1'
     }
 ];

@@ -25,7 +25,21 @@ async function loginFormHandler(event) {
     if (response.ok) {
       document.location.replace("/run-metrics");
     } else {
-      alert(response.statusText);
+      if (response.status === 400) {
+        // console.log(response)
+        var error = document.getElementById("error-password")
+        // Changing HTML to draw attention
+        error.innerHTML = "<span style='color: red;'>"+
+                          "Incorrect password. Please try again!</span>"
+      }
+
+      if (response.status === 401) {
+        // console.log(response)
+        var error = document.getElementById("error-username")
+        // Changing HTML to draw attention
+        error.innerHTML = "<span style='color: red;'>"+
+                          "Incorrect username. Please try again!</span>"
+      }
     }
   }
 }
