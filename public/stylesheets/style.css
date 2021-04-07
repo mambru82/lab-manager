@@ -499,11 +499,12 @@ body {
   color: white;
 }
 
+.center-content{
+  float: left;
+}
+
 #chartdiv {
   background-color: white;
-}
-#error-rates-table {
-  margin-left: 512px;
 }
 
 .table {
