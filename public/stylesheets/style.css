@@ -19,7 +19,7 @@ border-color: rgba(13, 110, 252, 0);
 animation-name: examples;
   animation-duration: 30s;
 }
-@keyframes examples {
+@keyframes examples  {
   0% {
     color: red;
   }
@@ -513,4 +513,19 @@ body {
 #results-summary-table{
   margin-left: 512px;
 }
-
+.table {
+  --bs-table-bg: #da1595cf;
+  --bs-table-striped-color: #1010f3;
+  --bs-table-striped-bg: rgb(211 58 228 / 54%);
+  --bs-table-active-color: #22e2f3;
+  --bs-table-active-bg: rgb(228 25 25);
+  --bs-table-hover-color: #0bf525;
+  --bs-table-hover-bg: rgb(243 6 6);
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #37efc5;
+  vertical-align: top;
+  border-color: #d454d3;
+  animation-name: example;
+  animation-duration: 30s;
+}
