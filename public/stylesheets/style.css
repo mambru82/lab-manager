@@ -523,3 +523,23 @@ body {
   animation-name: example;
   animation-duration: 30s;
 }
+@media screen and (max-width: 1419px) {
+  .sign {
+    font-size: 5em;
+  }
+}
+@media screen and (max-width: 1168px) {
+  .sign {
+    font-size: 4em;
+  }
+}
+@media screen and (max-width: 991px) {
+  .sign {
+    font-size: 3em;
+  }
+}
+@media screen and (max-width: 701px) {
+  .sign {
+    font-size: 2em;
+  }
+}
