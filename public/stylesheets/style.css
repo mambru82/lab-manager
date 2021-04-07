@@ -64,7 +64,7 @@ body {
 
 body {
   background-color: #000000;
-  color: rgb(247, 240, 240);
+  color: rgb(255, 255, 255);
  
 }
 
@@ -510,9 +510,9 @@ body {
 #error-rates-table {
   margin-left: 512px;
 }
-#results-summary-table{
+/* #results-summary-table{
   margin-left: 512px;
-}
+} */
 .table {
   --bs-table-bg: #da1595cf;
   --bs-table-striped-color: #1010f3;
@@ -528,4 +528,11 @@ body {
   border-color: #d454d3;
   animation-name: example;
   animation-duration: 30s;
+}
+a {
+color: white;
+
+}
+.tabletable-stripedtable-hover {
+  margin-right: auto;
 }
