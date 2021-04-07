@@ -3,7 +3,8 @@
 
     {{#if viewingPatientResults}}
     {{#if results.length}}
-    <h2 class="centerText">Results for patient: {{results.[0].patient.first_name}} {{results.[0].patient.last_name}}</h2>
+    <h2 class="centerText">Results for patient: {{results.[0].patient.first_name}} {{results.[0].patient.last_name}}
+    </h2>
     <table class="table table-striped table-hover" id="patients-table" border="1">
         <tr>
             <th>patient</th>
@@ -33,34 +34,21 @@
     <p>List of patients</p>
     <div class="container">
         <div class="row">
-             <table class="table table-striped table-hover centertText" id="patients-table">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>DOB</th>
-            <th>&nbsp;</th>
+            <table class="table table-striped table-hover centertText" id="patients-table">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>DOB</th>
+                    <th>&nbsp;</th>
 
-        </tr>
-        {{#each patients as |patient|}}
-        {{> patient-info patient }}
-        {{/each}}
-    </table>
-    {{/if}}
+                </tr>
+                {{#each patients as |patient|}}
+                {{> patient-info patient }}
+                {{/each}}
+            </table>
+            {{/if}}
         </div>
     </div>
-    <!-- <table class="table table-striped table-hover" id="patients-table">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>DOB</th>
-            <th>&nbsp;</th>
-
-        </tr>
-        {{#each patients as |patient|}}
-        {{> patient-info patient }}
-        {{/each}}
-    </table>
-    {{/if}} -->
 </div>
 
 <script src="/javascript/patient-info.js"></script>
