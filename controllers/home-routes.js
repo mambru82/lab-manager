@@ -1,6 +1,6 @@
-const Patient = require("../models/Patient");
-const Results = require("../models/Results");
 const router = require("express").Router();
+const {Patient, Results} = require("../models");
+const sequelize = require('../config/connection')
 
 router.get("/", (req, res) => {
   res.render("homepage");
