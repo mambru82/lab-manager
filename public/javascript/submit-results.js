@@ -17,6 +17,7 @@ async function resultFormHandler(event) {
 
        if (response.ok) {
          document.location.reload();
+       
        } else {
          alert(response.statusText);
        }
