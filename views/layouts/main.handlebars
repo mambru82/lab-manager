@@ -23,22 +23,23 @@
 
 <body>
     <div class="wrapper">
-        <header>
+       <!-- <header>
             {{>nav}}
-            <!-- <h1>
+             <h1>
                 <a href="/">Lab Manager</a>
             </h1>-->
-            {{#if loggedIn}}
-            <nav>
+          <!--  {{#if loggedIn}}
+            <nav class="">
                 <button id="logout" class="btn-no-style">logout</button>
+                            
             </nav>
             {{else}}
             <nav>
-                <!--  <a href="/login">login</a> |
-                <a href="/signup">signup</a>-->
+                  <a href="/login">login</a> |
+                <a href="/signup">signup</a>
             </nav>
             {{/if}}
-        </header>
+        </header> -->
         {{#if loggedIn}}
         <ul class="nav">
             <li class="nav-item">
@@ -62,19 +63,7 @@
 
 
         </ul>
-        {{!-- <div>
-            <hr>
-            <nav>&nbsp;&nbsp;
-                <a href="/run-metrics">Run Metrics</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/patients">Patient List</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/results">Results Summary</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                Tech Metrics&nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/accession-case">Accession Case</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/create-patient">Create Patient</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-                <a href="/enter-results">Enter Results</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-            </nav>
-            <hr>
-        </div> --}}
+        
         {{/if}}
         {{#if notification}}
         <div class="notification-box">
@@ -86,10 +75,6 @@
         </main>
 
     </div>
-
-
-
-
 
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>
