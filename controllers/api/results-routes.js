@@ -104,6 +104,8 @@ router.post("/accession", (req, res) => {
     });
 });
 
+
+    
 router.put('/:id', (req, res) => {
 //   if (!req.session.loggedIn) {
 //     res.redirect('../../login');
@@ -113,7 +115,6 @@ router.put('/:id', (req, res) => {
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     Results.update({
         result_date: sequelize.literal('CURRENT_TIMESTAMP'),
-        run_id: req.body.run_id,
         seq_name: req.body.seqName,
         clade: req.body.clade,
         qc_missing_data_score: req.body.qc.missingData.score,
@@ -141,7 +142,32 @@ router.put('/:id', (req, res) => {
         res.status(500).json(err);
     })
 });
-
+router.put('/run_update/:id', (req, res) => {
+    //   if (!req.session.loggedIn) {
+    //     res.redirect('../../login');
+    //   }
+        //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
+    
+        // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
+        Results.update({
+            run_id: req.body.run_id
+        }, {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(dbResultsData=> {
+            if (!dbResultsData[0]) {
+                res.status(404).json({ message: 'No result found with this id' });
+                return;
+            }
+            res.json(dbResultsData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+    });
 
 router.delete('/:id', (req, res) => {
   if (!req.session.loggedIn) {
