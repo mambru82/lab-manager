@@ -388,7 +388,7 @@ function resultsDataAnalysis(results) {
     for (var rId = 0; rId < len; rId++) {
       if (
         results[rId].run_id == distinctRunIds[i] &&
-        results[rId].errors != ""
+        results[rId].errors
       ) {
         errorCount++;
       }

@@ -117,12 +117,12 @@ router.put('/:id', (req, res) => {
         result_date: sequelize.literal('CURRENT_TIMESTAMP'),
         seq_name: req.body.seqName,
         clade: req.body.clade,
-        qc_missing_data_score: req.body.qc.missingData.score,
-        total_missing: req.body.qc.missingData.totalMissing,
-        missing_data_threshold: req.body.qc.missingData.missingDataThreshold,
-        status: req.body.qc.missingData.status,
-        overall_score: req.body.qc.overallScore,
-        overall_status: req.body.qc.overallStatus,
+        qc_missing_data_score: (req.body.qc)?req.body.qc.missingData.score:null,
+        total_missing: (req.body.qc)?req.body.qc.missingData.totalMissing:null,
+        missing_data_threshold: (req.body.qc)?req.body.qc.missingData.missingDataThreshold:null,
+        status: (req.body.qc)?req.body.qc.missingData.status:null,
+        overall_score: (req.body.qc)?req.body.qc.overallScore:null,
+        overall_status: (req.body.qc)?req.body.qc.overallStatus:null,
         nearest_tree_node_id: req.body.nearestTreeNodeId,
         errors: req.body.errors[0]
     }, {
