@@ -4,9 +4,9 @@ const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
 //pull a patient list for all patients
 router.get('/', (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect('../login');
-  }
+//   if (!req.session.loggedIn) {
+//     res.redirect('../login');
+//   }
     Run.findAll({
 
         order: [['id']],
@@ -18,6 +18,10 @@ router.get('/', (req, res) => {
             {
                 model: Assay,
                 attributes: ['assay_name']
+            },
+            {
+                model: Results,
+                attriburtes: ['clade']
             }
         ]
     })
@@ -34,8 +38,8 @@ router.post('/', (req, res) => {
     res.redirect('../login');
   }
     Run.create({
-        assay_id: req.body.patient_id,
-        tech_id: req.body.run_id,
+        assay_id: req.body.assay_id,
+        tech_id: req.body.tech_id,
     })
     .then(dbRunData => res.json(dbRunData))
     .catch(err => {

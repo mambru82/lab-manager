@@ -113,6 +113,7 @@ router.put('/:id', (req, res) => {
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     Results.update({
         result_date: sequelize.literal('CURRENT_TIMESTAMP'),
+        run_id: req.body.run_id,
         seq_name: req.body.seqName,
         clade: req.body.clade,
         qc_missing_data_score: req.body.qc.missingData.score,

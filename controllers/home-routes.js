@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {Patient, Results} = require("../models");
+const {Patient, Results, Tech, Run, Assay, AssayTech} = require("../models");
 const sequelize = require('../config/connection')
 
 router.get("/", (req, res) => {
@@ -159,7 +159,7 @@ router.get("/results/:id", (req, res) => {
     res.redirect('../login');
     return;
   }
-  Results.findAll({
+Results.findAll({
     attributes: [
       "id",
       "patient_id",
@@ -174,24 +174,31 @@ router.get("/results/:id", (req, res) => {
       {
         model: Patient,
         attributes: ["first_name", "last_name"],
-      },
+      }
     ],
   })
     .then((dbResultsData) => {
-      const results = dbResultsData.map((results) =>
+       results = dbResultsData.map((results) =>
         results.get({ plain: true })
       );
-      res.render("submit-results", {
-        results,
-        viewingPatientResults: true,
-        loggedIn: req.session.loggedIn
-      });
+      Run.findAll({}).then((dbRunData) => {
+        rundata = dbRunData.map((rundata) => 
+        rundata.get({ plain: true }))
+        res.render("submit-results", {
+          results, rundata,
+          viewingPatientResults: true,
+          loggedIn: req.session.loggedIn
+      })
+      
+      
+    });
     })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
-    });
-});
+    });}
+    
+);
 
 router.get("/run-metrics", (req, res) => {
   if (!req.session.loggedIn) {
@@ -229,6 +236,36 @@ router.get("/run-metrics", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+router.get("/start-run", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('login');
+    return;
+  }
+  Tech.findAll({
+    attributes: ["id", "first_name", "last_name", "assay_id"],
+    order: ["last_name"],
+    include: [
+      {
+        model: Assay,
+        as: 'assay_techs',
+        attributes: ["id", "assay_name", "analyte"]
+      }
+      ]
+  })
+  .then((dbTechData) => {
+    const techs = dbTechData.map ((techs) => 
+      techs.get({ plain: true }))
+    res.render("start-run", {
+      techs,
+      loggedIn: req.session.loggedIn
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+})
 
 router.get("/accession-case", (req, res) => {
   if (!req.session.loggedIn) {

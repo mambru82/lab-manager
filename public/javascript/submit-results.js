@@ -3,19 +3,26 @@ async function resultFormHandler(event) {
     event.preventDefault()
   
     let result_id = parseInt(document.querySelector("#result_id").innerHTML)
+    let runId = parseInt(document.getElementById("run_id").value.trim());
+    console.log(run_id);
     let result_body = document.getElementById("new_results").value.trim();
     console.log(result_id);
     console.log(result_body);
+    let submitObj = {
+      run_id = runId,
+      result_body
+    }
      if (result_body) {
        const response = await fetch(`/api/results/${result_id}`, {
          method: "PUT",
-         body: result_body,
+         body: submitObj,
          headers: {
            "Content-Type": "application/json",
          },
        });
 
-       if (response.ok) {
+  
+       if (response.ok ) {
          document.location.reload();
        
        } else {
