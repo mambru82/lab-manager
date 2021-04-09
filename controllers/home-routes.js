@@ -258,7 +258,8 @@ router.get("/start-run", (req, res) => {
       techs.get({ plain: true }))
     res.render("start-run", {
       techs,
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
+      notification: req.query.notification,
     })
   })
   .catch((err) => {
