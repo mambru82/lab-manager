@@ -107,9 +107,9 @@ router.post("/accession", (req, res) => {
 
     
 router.put('/:id', (req, res) => {
-//   if (!req.session.loggedIn) {
-//     res.redirect('../../login');
-//   }
+  if (!req.session.loggedIn) {
+    res.redirect('../../login');
+  }
     //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
 
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
@@ -143,9 +143,9 @@ router.put('/:id', (req, res) => {
     })
 });
 router.put('/run_update/:id', (req, res) => {
-    //   if (!req.session.loggedIn) {
-    //     res.redirect('../../login');
-    //   }
+      if (!req.session.loggedIn) {
+        res.redirect('../../login');
+      }
         //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
     
         // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead

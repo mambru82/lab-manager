@@ -4,9 +4,9 @@ const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
 //pull a patient list for all patients
 router.get('/', (req, res) => {
-//   if (!req.session.loggedIn) {
-//     res.redirect('../login');
-//   }
+  if (!req.session.loggedIn) {
+    res.redirect('../login');
+  }
     Run.findAll({
 
         order: [['id']],
