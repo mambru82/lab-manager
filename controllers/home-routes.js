@@ -245,22 +245,25 @@ router.get("/start-run", (req, res) => {
   Tech.findAll({
     attributes: ["id", "first_name", "last_name", "assay_id"],
     order: ["last_name"],
-    include: [
-      {
-        model: Assay,
-        as: 'assay_techs',
-        attributes: ["id", "assay_name", "analyte"]
-      }
-      ]
   })
   .then((dbTechData) => {
     const techs = dbTechData.map ((techs) => 
       techs.get({ plain: true }))
-    res.render("start-run", {
-      techs,
-      loggedIn: req.session.loggedIn,
-      notification: req.query.notification,
-    })
+      Assay.findAll({
+        attributes: ["id", "assay_name", "analyte"],
+        order: ["id"]
+      })
+      .then((dbAssayData) => {
+        const assays = dbAssayData.map ((assays) => 
+        assays.get({ plain: true }))
+        res.render("start-run", {
+          techs,
+          assays,
+          loggedIn: req.session.loggedIn,
+          notification: req.query.notification,
+        })
+      })
+    
   })
   .catch((err) => {
     console.log(err);

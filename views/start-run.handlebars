@@ -8,10 +8,10 @@
                 <option value="{{item.id}}">{{item.last_name}}, {{item.first_name}}</option>
                 {{/each}}
             </select> 
-            <label for="assay_id">Assay ID</label>
+            <label for="assay_id">Assay</label>
             <select id="assay_name" name="assay_dropdown" class="form-control w-100 mb-4">
-                {{#each techs as |item|}}
-                <option value="{{item.assay_id}}">{{item.assay_id}}</option>
+                {{#each assays as |item|}}
+                <option value="{{item.id}}">{{item.assay_name}} {{item.analyte}}</option>
                 {{/each}}
             </select>
         

@@ -1,3 +1,7 @@
+function removeWhiteSpaceFromArray(array){
+  return array.filter((item) => item != ' ');
+}
+
 async function resultFormHandler(event) {
     // console.log(event);
     event.preventDefault()
