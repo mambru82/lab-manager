@@ -237,17 +237,23 @@ router.get("/start-run/:id", (req, res) => {
   }
   Assay.findAll({
     attributes: ["id", "assay_name", "analyte"],
-    include: [
-      {
-        model: AssayTech,
-        as: "assay_techs",
-        attributes: ["tech_id"],
-      },
-    ],
-  })
+    })
     .then((dbAssays) => {
       const assays = dbAssays.map((assays) => assays.get({ plain: true }));
       res.send(assays);
+      AssayTech.findAll({
+        attributes: ["id", "assay_name", "analyte"],
+        })
+        .then((dbAssays) => {
+          const assays = dbAssays.map((assays) => assays.get({ plain: true }));
+          res.send(assays);
+          
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json(err);
+        });
+      
     })
     .catch((err) => {
       console.log(err);
