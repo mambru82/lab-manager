@@ -3,3 +3,4 @@ node_modules
 .env
 db/data/
 db/json_files
+.vscode/

@@ -13,35 +13,9 @@ router.get("/login", (req, res) => {
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
-/*
-router.get("/tech-main", (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect('login');
-    return;
-  }
-  const theData = { loggedIn: req.session.loggedIn }; 
-  res.render("tech-main", theData);
-  Patient.findAll({
-    attributes:[
-      'id',
-      'first_name',
-      'last_name',
-      'dob'
-    ]
-  }).then(dbPatientData => {
-      const patients = dbPatientData.map(patients => patients.get({ plain: true }));
 
-      res.render('tech-main', {
-        patients,
-        loggedIn: req.session.loggedIn
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-*/
+// renders the Chart summary for all results
+
 router.get("/results", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');
@@ -78,6 +52,8 @@ router.get("/results", (req, res) => {
     });
 });
 
+// Renders the patient list
+
 router.get("/patients", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');
@@ -110,7 +86,7 @@ router.get("/patients", (req, res) => {
     });
 });
 
-
+//Renders each individual patient
 router.get("/patients/:id", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -154,6 +130,7 @@ router.get("/patients/:id", (req, res) => {
     });
 });
 
+//Renders an individual result (for result entry)
 router.get("/results/:id", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -181,6 +158,7 @@ Results.findAll({
        results = dbResultsData.map((results) =>
         results.get({ plain: true })
       );
+      //queries the available runs so that the user can select from existing runs
       Run.findAll({}).then((dbRunData) => {
         rundata = dbRunData.map((rundata) => 
         rundata.get({ plain: true }))
@@ -189,8 +167,7 @@ Results.findAll({
           viewingPatientResults: true,
           loggedIn: req.session.loggedIn
       })
-      
-      
+            
     });
     })
     .catch((err) => {
@@ -200,6 +177,7 @@ Results.findAll({
     
 );
 
+// Renders the run metrics chart
 router.get("/run-metrics", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');
@@ -237,6 +215,7 @@ router.get("/run-metrics", (req, res) => {
     });
 });
 
+// Renders the start run 
 router.get("/start-run", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');
@@ -271,6 +250,7 @@ router.get("/start-run", (req, res) => {
   });
 })
 
+// Renders the accession case screen
 router.get("/accession-case", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('login');

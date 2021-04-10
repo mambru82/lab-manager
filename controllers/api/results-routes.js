@@ -2,7 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
-//pull a patient list for all patients
+//pull a results list for all results
 router.get('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -24,6 +24,8 @@ router.get('/', (req, res) => {
     })
 
 })
+
+//pull an individual result (necessary when updating a single result)
 router.get('/:id', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../../login');
@@ -52,6 +54,8 @@ router.get('/:id', (req, res) => {
         res.status(500).json(err);
     })
 })
+
+//create a result using JSON output format
 router.post('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -78,6 +82,7 @@ router.post('/', (req, res) => {
     })
 });
 
+// create a result using the website input
 router.post("/accession", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../../login');
@@ -105,14 +110,11 @@ router.post("/accession", (req, res) => {
 });
 
 
-    
+//update result contents for a given result    
 router.put('/:id', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../../login');
   }
-    //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
-
-    // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     Results.update({
         result_date: sequelize.literal('CURRENT_TIMESTAMP'),
         seq_name: req.body.seqName,
@@ -142,6 +144,8 @@ router.put('/:id', (req, res) => {
         res.status(500).json(err);
     })
 });
+
+//update run_id for a given result
 router.put('/run_update/:id', (req, res) => {
       if (!req.session.loggedIn) {
         res.redirect('../../login');

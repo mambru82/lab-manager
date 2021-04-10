@@ -31,6 +31,8 @@ router.get('/', (req, res) => {
 
 })
 
+//create a patient
+
 router.post('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -47,6 +49,7 @@ router.post('/', (req, res) => {
     })
 });
 
+//delete a given patient (only available through Insomnia)
 router.delete('/:id', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../../login');

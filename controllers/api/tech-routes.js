@@ -4,10 +4,10 @@ const { Assay, Patient, Results, Run, Tech, AssayTech } = require('../../models'
 
 //GET /api/users
 router.get('/', (req, res) => {
-  // if (!req.session.loggedIn) {
-  //   res.redirect('../login');
-  // }
-    // Access our User model and run .findAll() method
+  if (!req.session.loggedIn) {
+    res.redirect('../login');
+  }
+    // Access our Tech model and run .findAll() method
     Tech.findAll({
         attributes: {exclude: ['password']},
         include: [

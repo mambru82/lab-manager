@@ -2,9 +2,9 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Assay, Patient, Results, Run, Tech } = require('../../models');
 
-//GET /api/users
+//GET /api/assays
 router.get('/', (req, res) => {
-    // Access our User model and run .findAll() method
+    // Access our assay model and run .findAll() method
     Assay.findAll({})
     .then(dbAssayData => res.json(dbAssayData))
     .catch(err => {
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     })
 })
 
-// GET /api/users/1
+// GET /api/assays/1
 router.get('/:id', (req, res) => {
 
     Assay.findOne({
@@ -34,16 +34,15 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// POST /api/users
+// POST /api/assays
 router.post('/', (req, res) => {
-    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
+    // expects {assay: 'COVIDSeq', analyte: 'Sars-Cov2' }
     Assay.create({
         assay_name: req.body.assay,
         analyte: req.body.analyte
     })
     .then(dbAssayData => res.json(dbAssayData))
     .catch(err => {
-      // checks for valid password and sends message to user if password invalid
       if (err.name === 'SequelizeValidationError') {
         var message = err.errors.map(e => e.message).toString();
           res.status(422).json({ 

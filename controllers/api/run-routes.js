@@ -2,7 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
-//pull a patient list for all patients
+//pull a run list for all runs (only available through Insomnia)
 router.get('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -33,6 +33,7 @@ router.get('/', (req, res) => {
 
 })
 
+//creates a single run
 router.post('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -48,6 +49,7 @@ router.post('/', (req, res) => {
     })
 });
 
+//deletes a run (only available through Insomnia)
 router.delete('/:id', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../../login');
