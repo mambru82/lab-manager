@@ -533,15 +533,15 @@ body {
   --bs-table-striped-bg: rgba(12, 12, 12, 0.54);
   --bs-table-active-color: #22e2f3;
   --bs-table-active-bg: rgb(228, 25, 25);
-  --bs-table-hover-color: #0bf525;
-  --bs-table-hover-bg: rgb(175, 73, 6);
+  --bs-table-hover-color: #000000;
+  --bs-table-hover-bg: rgb(255, 196, 0);
   width: 100%;
   margin-bottom: 1rem;
   color: #ffffff;
   vertical-align: top;
-  border-color: #d454d3;
-  animation-name: example;
-  animation-duration: 30s;
+  border-color: #ffffff;
+  /* animation-name: example;
+  animation-duration: 30s; */
 }
 @media screen and (max-width: 1419px) {
   .sign {
