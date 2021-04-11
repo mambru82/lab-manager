@@ -531,8 +531,8 @@ body {
   --bs-table-striped-bg: rgba(12, 12, 12, 0.54);
   --bs-table-active-color: #22e2f3;
   --bs-table-active-bg: rgb(228, 25, 25);
-  --bs-table-hover-color: #000000;
-  --bs-table-hover-bg: rgb(255, 196, 0);
+  --bs-table-hover-color: #ffffff;
+  --bs-table-hover-bg: #4caf50;
   width: 100%;
   margin-bottom: 1rem;
   color: #ffffff;
@@ -642,6 +642,7 @@ body {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 
 @media screen and (max-width: 980px) {
   .topnav a:not(:first-child),

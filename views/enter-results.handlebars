@@ -3,7 +3,7 @@
         {{#if results.length}}
         <h2 class="centerText">List of pending results</h2>
         <table class="table table-striped">
-            <tr class="table-danger">
+            <tr>
                 <th>result id</th>
                 <th>patient</th>
                 <th>run_id</th>
@@ -14,7 +14,7 @@
                 <th>&nbsp;</th>
             </tr>
             {{#each results as |item|}}
-            <tr class="table table-striped">
+            <tr class="table table-striped table-hover">
                 <td>{{item.id}}</td>
                 <td>{{item.patient.first_name}} {{item.patient.last_name}}</td>
                 <td>{{item.run_id}}</td>
