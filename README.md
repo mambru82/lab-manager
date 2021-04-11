@@ -6,9 +6,12 @@
 - [What We Learned](#what-we-learned)
 - [Built With](#built-with)
 - [How To Use Lab Manager](#how-to-use-lab-manager)
+- [Description of Typical Work Flow](#description-of-typical-work-flow)
+- [Summary Data](#summary-data)
 - [Website](#website)
 - [License](#license)
-- [Contribute](#contribute)
+- [Disclaimer](#disclaimer)
+- [Contribution](#contribution)
 - [Test](#test)
 - [Questions](#questions)
 
@@ -65,7 +68,7 @@ In a new terminal window, cd into the root of the project, run the following com
 npm run seed
 ```
 
-### Description of typical work-flow
+## Description of Typical Work Flow
 
 Lab manager is designed to follow the typical workflow for a trained laboratory technician running an assay for COVID-19 sequencing data once the data has been sequenced and analyzed using the [Nextclade](https://clades.nextstrain.org/) application. Once a lab tech signs up with a username and password, the typical workflow is as follows:
 
@@ -80,7 +83,7 @@ Lab manager is designed to follow the typical workflow for a trained laboratory 
 - Results may be copied and pasted directly from the JSON file (without the outside brackets) into the form and submitted. The application is designed to process the relevant data
 - Contrived sample data files are available in the db/data/ directory to test out.
 
-### Summary data
+## Summary Data
 
 Summary data currently available includes:
 
