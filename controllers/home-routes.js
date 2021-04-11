@@ -1,6 +1,6 @@
-const Patient = require("../models/Patient");
-const Results = require("../models/Results");
 const router = require("express").Router();
+const { Patient, Results, Tech, Run, Assay, AssayTech } = require("../models");
+const sequelize = require("../config/connection");
 
 router.get("/", (req, res) => {
   res.render("homepage");
@@ -13,38 +13,12 @@ router.get("/login", (req, res) => {
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
-/*
-router.get("/tech-main", (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect('login');
-    return;
-  }
-  const theData = { loggedIn: req.session.loggedIn }; 
-  res.render("tech-main", theData);
-  Patient.findAll({
-    attributes:[
-      'id',
-      'first_name',
-      'last_name',
-      'dob'
-    ]
-  }).then(dbPatientData => {
-      const patients = dbPatientData.map(patients => patients.get({ plain: true }));
 
-      res.render('tech-main', {
-        patients,
-        loggedIn: req.session.loggedIn
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-*/
+// renders the Chart summary for all results
+
 router.get("/results", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('login');
+    res.redirect("login");
   }
   const Op = require("sequelize").Op;
   Results.findAll({
@@ -69,7 +43,7 @@ router.get("/results", (req, res) => {
       res.render("results", {
         results,
         chartdata,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
@@ -78,9 +52,11 @@ router.get("/results", (req, res) => {
     });
 });
 
+// Renders the patient list
+
 router.get("/patients", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('login');
+    res.redirect("login");
     return;
   }
   console.log(req.query);
@@ -101,7 +77,7 @@ router.get("/patients", (req, res) => {
 
       res.render("patients", {
         patients,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
@@ -110,10 +86,10 @@ router.get("/patients", (req, res) => {
     });
 });
 
-
+//Renders each individual patient
 router.get("/patients/:id", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('../login');
+    res.redirect("../login");
     return;
   }
   Results.findAll({
@@ -145,7 +121,7 @@ router.get("/patients/:id", (req, res) => {
       res.render("patients", {
         results,
         viewingPatientResults: true,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
@@ -154,18 +130,14 @@ router.get("/patients/:id", (req, res) => {
     });
 });
 
+//Renders an individual result (for result entry)
 router.get("/results/:id", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('../login');
+    res.redirect("../login");
     return;
   }
   Results.findAll({
-    attributes: [
-      "id",
-      "patient_id",
-      "seq_name",
-      "accession_date",
-    ],
+    attributes: ["id", "patient_id", "seq_name", "accession_date"],
     order: [["id"]],
     where: {
       id: req.params.id,
@@ -178,13 +150,15 @@ router.get("/results/:id", (req, res) => {
     ],
   })
     .then((dbResultsData) => {
-      const results = dbResultsData.map((results) =>
-        results.get({ plain: true })
-      );
-      res.render("submit-results", {
-        results,
-        viewingPatientResults: true,
-        loggedIn: req.session.loggedIn
+      results = dbResultsData.map((results) => results.get({ plain: true }));
+      Run.findAll({}).then((dbRunData) => {
+        rundata = dbRunData.map((rundata) => rundata.get({ plain: true }));
+        res.render("submit-results", {
+          results,
+          rundata,
+          viewingPatientResults: true,
+          loggedIn: req.session.loggedIn,
+        });
       });
     })
     .catch((err) => {
@@ -193,9 +167,10 @@ router.get("/results/:id", (req, res) => {
     });
 });
 
+// Renders the run metrics chart
 router.get("/run-metrics", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('login');
+    res.redirect("login");
     return;
   }
   const Op = require("sequelize").Op;
@@ -221,7 +196,7 @@ router.get("/run-metrics", (req, res) => {
       res.render("run-metrics", {
         results,
         chartdata,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
       });
     })
     .catch((err) => {
@@ -230,9 +205,45 @@ router.get("/run-metrics", (req, res) => {
     });
 });
 
+// Renders the start run 
+router.get("/start-run", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("login");
+    return;
+  }
+  Tech.findAll({
+    attributes: ["id", "first_name", "last_name", "assay_id"],
+    order: ["last_name"],
+  })
+  .then((dbTechData) => {
+    const techs = dbTechData.map ((techs) => 
+      techs.get({ plain: true }))
+      Assay.findAll({
+        attributes: ["id", "assay_name", "analyte"],
+        order: ["id"]
+      })
+      .then((dbAssayData) => {
+        const assays = dbAssayData.map ((assays) => 
+        assays.get({ plain: true }))
+        res.render("start-run", {
+          techs,
+          assays,
+          loggedIn: req.session.loggedIn,
+          notification: req.query.notification,
+        })
+      })
+    
+  })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// Renders the accession case screen
 router.get("/accession-case", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('login');
+    res.redirect("login");
     return;
   }
   Patient.findAll({
@@ -257,19 +268,20 @@ router.get("/accession-case", (req, res) => {
 });
 
 router.get("/enter-results", (req, res) => {
-  if(!req.session.loggedIn) {
-    res.redirect('login');
+  if (!req.session.loggedIn) {
+    res.redirect("login");
     return;
   }
   const Op = require("sequelize").Op;
   Results.findAll({
     attributes: [
-        "id", 
-        "clade", 
-        "accession_date", 
-        "result_date", 
-        "run_id", 
-        "seq_name"],
+      "id",
+      "clade",
+      "accession_date",
+      "result_date",
+      "run_id",
+      "seq_name",
+    ],
     order: [["accession_date"]],
     where: {
       result_date: { [Op.eq]: null },
@@ -277,35 +289,35 @@ router.get("/enter-results", (req, res) => {
     include: [
       {
         model: Patient,
-        attributes: ["id", "first_name", "last_name"]
-      }
-    ]
+        attributes: ["id", "first_name", "last_name"],
+      },
+    ],
   })
-  .then((dbResultsData) => {
-    const results = dbResultsData.map((results) => 
-    results.get( { plain: true })
-    );
+    .then((dbResultsData) => {
+      const results = dbResultsData.map((results) =>
+        results.get({ plain: true })
+      );
 
-    res.render("enter-results", {
-      results,
-      loggedIn: req.session.loggedIn,
-      notification: req.query.notification
+      res.render("enter-results", {
+        results,
+        loggedIn: req.session.loggedIn,
+        notification: req.query.notification,
+      });
     })
-  })
-  .catch((err) => {
-    console.log(err);
-    res.status(500).json(err);
-  })
-})
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 router.get("/create-patient", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect('login');
+    res.redirect("login");
     return;
   }
-  res.render("create-patient",{
+  res.render("create-patient", {
     notification: req.query.notification,
-    loggedIn: req.session.loggedIn
+    loggedIn: req.session.loggedIn,
   });
 });
 
@@ -349,10 +361,7 @@ function resultsDataAnalysis(results) {
 
     var errorCount = 0;
     for (var rId = 0; rId < len; rId++) {
-      if (
-        results[rId].run_id == distinctRunIds[i] &&
-        results[rId].errors != ""
-      ) {
+      if (results[rId].run_id == distinctRunIds[i] && results[rId].errors) {
         errorCount++;
       }
     }

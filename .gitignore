@@ -1,4 +1,6 @@
 node_modules
 .DS_Store
 .env
-package-lock.json
+db/data/
+db/json_files
+.vscode/

@@ -6,7 +6,6 @@
         <tr>
             <th>result_id</th>
             <th>patient</th>
-            <th>run_id</th>
             <th>accession_date</th>
 
         </tr>
@@ -14,13 +13,19 @@
         <tr>
             <td id="result_id">{{id}}</td>
             <td>{{item.patient.first_name}} {{item.patient.last_name}}</td>
-            <td>{{item.run_id}}</td>
             <td>{{item.accession_date}}</td>
 
         </tr>
         {{/each}}
         </table>
+
         <form class="submit-results-form">
+        <label for="run_id">Run ID</label>
+            <select id="run_id" name="run_dropdown" class="form-control w-100 mb-4">
+                {{#each rundata as |item|}}
+                <option value="{{item.id}}">{{item.id}}</option>
+                {{/each}}
+            </select>
             <label for="new_results">Please enter JSON results below:</label><br>
             <input type="text" id="new_results" name="new_results"><br>
             <input type="submit">

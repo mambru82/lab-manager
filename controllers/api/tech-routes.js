@@ -1,15 +1,24 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Assay, Patient, Results, Run, Tech } = require('../../models');
+const { Assay, Patient, Results, Run, Tech, AssayTech } = require('../../models');
 
 //GET /api/users
 router.get('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
   }
-    // Access our User model and run .findAll() method
+    // Access our Tech model and run .findAll() method
     Tech.findAll({
-        attributes: {exclude: ['password']}
+        attributes: {exclude: ['password']},
+        include: [
+          {
+            model: Assay,
+            as: 'assay_techs',
+            attributes: [
+              'assay_name', 'analyte'
+            ]
+          }
+        ]
     })
     .then(dbTechData => res.json(dbTechData))
     .catch(err => {

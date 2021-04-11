@@ -2,7 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Assay, Patient, Results, Run, Tech } = require('../../models')
 
-//pull a patient list for all patients
+//pull a results list for all results
 router.get('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -24,6 +24,8 @@ router.get('/', (req, res) => {
     })
 
 })
+
+//pull an individual result (necessary when updating a single result)
 router.get('/:id', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../../login');
@@ -52,6 +54,8 @@ router.get('/:id', (req, res) => {
         res.status(500).json(err);
     })
 })
+
+//create a result using JSON output format
 router.post('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../login');
@@ -78,6 +82,7 @@ router.post('/', (req, res) => {
     })
 });
 
+// create a result using the website input
 router.post("/accession", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../../login');
@@ -104,23 +109,22 @@ router.post("/accession", (req, res) => {
     });
 });
 
+
+//update result contents for a given result    
 router.put('/:id', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('../../login');
   }
-    //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
-
-    // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     Results.update({
         result_date: sequelize.literal('CURRENT_TIMESTAMP'),
         seq_name: req.body.seqName,
-        clade: req.body.clade,
-        qc_missing_data_score: req.body.qc.missingData.score,
-        total_missing: req.body.qc.missingData.totalMissing,
-        missing_data_threshold: req.body.qc.missingData.missingDataThreshold,
-        status: req.body.qc.missingData.status,
-        overall_score: req.body.qc.overallScore,
-        overall_status: req.body.qc.overallStatus,
+        clade: (req.body.clade)?req.body.clade:"assay failed",
+        qc_missing_data_score: (req.body.qc)?req.body.qc.missingData.score:null,
+        total_missing: (req.body.qc)?req.body.qc.missingData.totalMissing:null,
+        missing_data_threshold: (req.body.qc)?req.body.qc.missingData.missingDataThreshold:null,
+        status: (req.body.qc)?req.body.qc.missingData.status:null,
+        overall_score: (req.body.qc)?req.body.qc.overallScore:null,
+        overall_status: (req.body.qc)?req.body.qc.overallStatus:null,
         nearest_tree_node_id: req.body.nearestTreeNodeId,
         errors: req.body.errors[0]
     }, {
@@ -141,6 +145,33 @@ router.put('/:id', (req, res) => {
     })
 });
 
+//update run_id for a given result
+router.put('/run_update/:id', (req, res) => {
+      if (!req.session.loggedIn) {
+        res.redirect('../../login');
+      }
+        //expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234' }
+    
+        // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
+        Results.update({
+            run_id: req.body.run_id
+        }, {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(dbResultsData=> {
+            if (!dbResultsData[0]) {
+                res.status(404).json({ message: 'No result found with this id' });
+                return;
+            }
+            res.json(dbResultsData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+    });
 
 router.delete('/:id', (req, res) => {
   if (!req.session.loggedIn) {
