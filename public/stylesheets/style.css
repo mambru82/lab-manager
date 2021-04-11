@@ -10,6 +10,15 @@
   animation-name: examples;
   animation-duration: 30s;
 }
+.home-buttons {
+  margin: 0 10% 8% 0;
+  width: 100%;
+  text-align: end;
+}
+
+.home-buttons button {
+  margin: 0 0 0 10px;
+}
 .btn-primary {
   color: #fff;
   background-color: rgba(252, 13, 13, 0);
@@ -455,7 +464,7 @@ body {
 }
 
 .login-form {
-  margin-left: 512px;
+  justify-content: center;
 }
 .image {
   display: block;
