@@ -118,7 +118,7 @@ router.put('/:id', (req, res) => {
     Results.update({
         result_date: sequelize.literal('CURRENT_TIMESTAMP'),
         seq_name: req.body.seqName,
-        clade: req.body.clade,
+        clade: (req.body.clade)?req.body.clade:"assay failed",
         qc_missing_data_score: (req.body.qc)?req.body.qc.missingData.score:null,
         total_missing: (req.body.qc)?req.body.qc.missingData.totalMissing:null,
         missing_data_threshold: (req.body.qc)?req.body.qc.missingData.missingDataThreshold:null,
