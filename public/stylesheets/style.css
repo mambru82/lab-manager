@@ -643,7 +643,8 @@ body {
   display: block;
 }
 
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 980px) {
   .topnav a:not(:first-child),
   .dropdown .dropbtn {
     display: none;
@@ -654,7 +655,7 @@ body {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 980px) {
   .topnav.responsive {
     position: relative;
   }
@@ -672,11 +673,32 @@ body {
     float: none;
   }
   .topnav.responsive .dropdown-content {
-    position: sticky;
+    position: relative;
   }
   .topnav.responsive .dropdown .dropbtn {
     display: block;
     width: 100%;
     text-align: left;
+  }
+}
+
+@media screen and (max-width: 1419px) {
+  .sign {
+    font-size: 5em;
+  }
+}
+@media screen and (max-width: 1168px) {
+  .sign {
+    font-size: 4em;
+  }
+}
+@media screen and (max-width: 991px) {
+  .sign {
+    font-size: 3em;
+  }
+}
+@media screen and (max-width: 718px) {
+  .sign {
+    font-size: 2em;
   }
 }
