@@ -1,5 +1,9 @@
 /* @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900); */
 
+.nav-link {
+  animation-name: examples;
+  animation-duration: 30s;
+}
 .home-buttons {
   margin: 0 10% 8% 0;
   width: 100%;
@@ -16,23 +20,23 @@
   animation-name: examples;
   animation-duration: 30s;
 }
-.nav-link {
+.page-link {
   background: rgb(0, 81, 255);
   color: rgb(255, 255, 255);
   border-radius: 50px;
   margin-left: 20px;
   margin-right: 20px;
   text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  border: none;
   transition: 1ms;
 }
-.nav-link:hover {
+.page-link:hover {
   background: rgba(255, 196, 0);
   color: rgb(0, 0, 0);
   border-radius: 50px;
   transform: scale(1.1);
   text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.5);
 }
-
 @keyframes examples {
   0% {
     color: red;
