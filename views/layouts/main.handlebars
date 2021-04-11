@@ -22,74 +22,75 @@
 </head>
 
 <body>
-    <header>
-      {{#unless loggedIn}}
-      {{>nav}}
-      {{/unless}}
-      <!-- <h1>
+  <header>
+    {{#unless loggedIn}}
+    {{>nav}}
+    {{/unless}}
+    <!-- <h1>
                 <a href="/">Lab Manager</a>
             </h1>-->
-      {{#if loggedIn}}
-      <nav>
-        <button id="logout" class="btn btn-warning ms-1 position-absolute top-0 end-0">
-          logout
-          </button>
-      </nav>
-      {{else}}
-      <nav>
-        <!--  <a href="/login">login</a> |
-                <a href="/signup">signup</a>-->
-      </nav>
-      {{/if}}
-    </header>
     {{#if loggedIn}}
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="/run-metrics">Run Metrics</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/patients">Patient List</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/results">Results Summary</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/start-run">Start Run</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/accession-case">Accession Case</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/create-patient">Create Patient</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/enter-results">Enter Results</a>
-      </li>
+    <nav>
+      <button id="logout" class="btn btn-warning mt-1 me-1 position-absolute top-0 end-0">
+        <i class="fas fa-sign-out-alt"></i>
+        Logout
+      </button>
+    </nav>
+    {{else}}
+    <nav>
+      <!--  <a href="/login">login</a> |
+                <a href="/signup">signup</a>-->
+    </nav>
+    {{/if}}
+  </header>
+  {{#if loggedIn}}
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="/run-metrics">Run Metrics</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/patients">Patient List</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/results">Results Summary</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/start-run">Start Run</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/accession-case">Accession Case</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/create-patient">Create Patient</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/enter-results">Enter Results</a>
+    </li>
 
 
-    </ul>
-    {{!-- <div>
-      <hr>
-      <nav>&nbsp;&nbsp;
-        <a href="/run-metrics">Run Metrics</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/patients">Patient List</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/results">Results Summary</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-        Tech Metrics&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/accession-case">Accession Case</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/create-patient">Create Patient</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/enter-results">Enter Results</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-      </nav>
-      <hr>
-    </div> --}}
-    {{/if}}
-    {{#if notification}}
-    <div class="notification-box">
-      {{notification}}
-    </div>
-    {{/if}}
-    <main>
-      {{{ body }}}
-    </main>
+  </ul>
+  {{!-- <div>
+    <hr>
+    <nav>&nbsp;&nbsp;
+      <a href="/run-metrics">Run Metrics</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="/patients">Patient List</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="/results">Results Summary</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      Tech Metrics&nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="/accession-case">Accession Case</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="/create-patient">Create Patient</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="/enter-results">Enter Results</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+    </nav>
+    <hr>
+  </div> --}}
+  {{/if}}
+  {{#if notification}}
+  <div class="notification-box">
+    {{notification}}
+  </div>
+  {{/if}}
+  <main>
+    {{{ body }}}
+  </main>
 
 
 
