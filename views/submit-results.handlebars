@@ -1,37 +1,41 @@
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+        <div class="col-sm-3">
+            {{#if results.length}}
+            <p>Results for patient: {{results.[0].patient.first_name}} {{results.[0].patient.last_name}}</p>
+            <table class="table table-striped table-hover" id="patients-table" border="1">
+                <tr>
+                    <th>result_id</th>
+                    <th>patient</th>
+                    <th>accession_date</th>
 
+                </tr>
+                {{#each results as |item|}}
+                <tr>
+                    <td id="result_id">{{id}}</td>
+                    <td>{{item.patient.first_name}} {{item.patient.last_name}}</td>
+                    <td>{{item.accession_date}}</td>
 
-    {{#if results.length}}
-        <p>Results for patient: {{results.[0].patient.first_name}} {{results.[0].patient.last_name}}</p>
-        <table id="patients-table" border="1">
-        <tr>
-            <th>result_id</th>
-            <th>patient</th>
-            <th>accession_date</th>
-
-        </tr>
-        {{#each results as |item|}}
-        <tr>
-            <td id="result_id">{{id}}</td>
-            <td>{{item.patient.first_name}} {{item.patient.last_name}}</td>
-            <td>{{item.accession_date}}</td>
-
-        </tr>
-        {{/each}}
-        </table>
-
-        <form class="submit-results-form">
-        <label for="run_id">Run ID</label>
-            <select id="run_id" name="run_dropdown" class="form-control w-100 mb-4">
-                {{#each rundata as |item|}}
-                <option value="{{item.id}}">{{item.id}}</option>
+                </tr>
                 {{/each}}
-            </select>
-            <label for="new_results">Please enter JSON results below:</label><br>
-            <input type="text" id="new_results" name="new_results"><br>
-            <input type="submit">
-        </form>
-    {{else}}
-        <p>This patient has no records.</p>
-    {{/if}}
+            </table>
+
+            <form class="submit-results-form">
+                <label for="run_id">Run ID</label>
+                <select id="run_id" name="run_dropdown" class="form-control w-100 mb-4">
+                    {{#each rundata as |item|}}
+                    <option value="{{item.id}}">{{item.id}}</option>
+                    {{/each}}
+                </select>
+                <label for="new_results">Please enter JSON results below:</label><br>
+                <input type="text" id="new_results" name="new_results"><br>
+                <input type="submit" class="btn btn-danger mt-2">
+            </form>
+        </div>
+    </div>
+</div>
+{{else}}
+<p>This patient has no records.</p>
+{{/if}}
 
 <script src="/javascript/submit-results.js"></script>
