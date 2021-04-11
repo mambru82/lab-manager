@@ -1,24 +1,25 @@
-<div class="container">
-    <div class="row">
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
         <div class="col-sm-3">
-    <form class="start-run-form">
-            <label for="tech">Tech name:</label>
-            <select id="tech_name" name="tech_dropdown" class="form-control w-100  mb-4">
-                {{#each techs as |item|}}
-                <option value="{{item.id}}">{{item.last_name}}, {{item.first_name}}</option>
-                {{/each}}
-            </select> 
-            <label for="assay_id">Assay</label>
-            <select id="assay_name" name="assay_dropdown" class="form-control w-100 mb-4">
-                {{#each assays as |item|}}
-                <option value="{{item.id}}">{{item.assay_name}} {{item.analyte}}</option>
-                {{/each}}
-            </select>
-        
-            {{!-- <input type="text" class="form-control w-100 mb-4" placeholder="Enter a sequence name" id="seq_name" name="seq_name"> --}}
+            <form class="start-run-form">
+                <label for="tech">Tech name:</label>
+                <select id="tech_name" name="tech_dropdown" class="form-control w-100  mb-4">
+                    {{#each techs as |item|}}
+                    <option value="{{item.id}}">{{item.last_name}}, {{item.first_name}}</option>
+                    {{/each}}
+                </select>
+                <label for="assay_id">Assay</label>
+                <select id="assay_name" name="assay_dropdown" class="form-control w-100 mb-4">
+                    {{#each assays as |item|}}
+                    <option value="{{item.id}}">{{item.assay_name}} {{item.analyte}}</option>
+                    {{/each}}
+                </select>
 
-            <input type="submit">
-</form>
+                {{!-- <input type="text" class="form-control w-100 mb-4" placeholder="Enter a sequence name"
+                    id="seq_name" name="seq_name"> --}}
+
+                <input type="submit" class="btn btn-danger">
+            </form>
         </div>
     </div>
 </div>

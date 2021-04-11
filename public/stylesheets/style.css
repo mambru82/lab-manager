@@ -1,11 +1,5 @@
 /* @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900); */
 
-.fa,
-.fas {
-  color: rgb(247, 109, 109);
-  font-weight: 900;
-}
-
 .nav-link {
   animation-name: examples;
   animation-duration: 30s;
@@ -26,6 +20,7 @@
   animation-name: examples;
   animation-duration: 30s;
 }
+
 @keyframes examples {
   0% {
     color: red;
@@ -508,7 +503,7 @@ body {
   color: white;
 }
 
-.center-content{
+.center-content {
   float: left;
 }
 
