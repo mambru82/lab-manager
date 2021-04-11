@@ -26,62 +26,24 @@
     {{#unless loggedIn}}
     {{>nav}}
     {{/unless}}
-    <!-- <h1>
-                <a href="/">Lab Manager</a>
-            </h1>-->
-    {{#if loggedIn}}
-    <nav>
-      <button id="logout" class="btn btn-warning mt-1 me-1 position-absolute top-0 end-0">
-        <i class="fas fa-sign-out-alt"></i>
-        Logout
-      </button>
-    </nav>
-    {{else}}
-    <nav>
-      <!--  <a href="/login">login</a> |
-                <a href="/signup">signup</a>-->
-    </nav>
-    {{/if}}
+
   </header>
   {{#if loggedIn}}
-  <ul class="nav mt-1">
-    <li class="nav-item">
-      <a class="page-link active" href="/run-metrics">Run Metrics</a>
-    </li>
-    <li class="nav-item">
-      <a class="page-link" href="/patients">Patient List</a>
-    </li>
-    <li class="nav-item">
-      <a class="page-link" href="/results">Results Summary</a>
-    </li>
-    <li class="nav-item">
-      <a class="page-link" href="/start-run">Start Run</a>
-    </li>
-    <li class="nav-item">
-      <a class="page-link" href="/accession-case">Accession Case</a>
-    </li>
-    <li class="nav-item">
-      <a class="page-link" href="/create-patient">Create Patient</a>
-    </li>
-    <li class="nav-item">
-      <a class="page-link" href="/enter-results">Enter Results</a>
-    </li>
 
+  <div class="topnav" id="myTopnav">
+    <div>
+      <a href="/run-metrics" {{#if runmetrics}}class="active" {{/if}}>Run Metrics</a>
+      <a href="/patients" {{#if patientspage}}class="active" {{/if}}>Patients</a>
+      <a href="/results" {{#if resultspage}}class="active" {{/if}}>Results</a>
+      <a href="/accession-case" {{#if accessioncasepage}}class="active" {{/if}}>Create Accession Case</a>
+      <a href="/start-run" {{#if startrunpage}}class="active" {{/if}}>Start New Run</a>
+      <a href="/create-patient" {{#if createpatientpage}}class="active" {{/if}}>Create New Patient</a>
+      <a href="/enter-results" {{#if enterresultspage}}class="active" {{/if}}>Enter Results</a>
+      <a href="javascript:void(0);" onclick="logout()">Logout</a>
+      <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+  </div>
 
-  </ul>
-  {{!-- <div>
-    <hr>
-    <nav>&nbsp;&nbsp;
-      <a href="/run-metrics">Run Metrics</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="/patients">Patient List</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="/results">Results Summary</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-      Tech Metrics&nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="/accession-case">Accession Case</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="/create-patient">Create Patient</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="/enter-results">Enter Results</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-    </nav>
-    <hr>
-  </div> --}}
   {{/if}}
   {{#if notification}}
   <div class="notification-box">

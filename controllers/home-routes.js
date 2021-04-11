@@ -44,6 +44,7 @@ router.get("/results", (req, res) => {
         results,
         chartdata,
         loggedIn: req.session.loggedIn,
+        resultspage: 1,
       });
     })
     .catch((err) => {
@@ -78,6 +79,7 @@ router.get("/patients", (req, res) => {
       res.render("patients", {
         patients,
         loggedIn: req.session.loggedIn,
+        patientspage: 1,
       });
     })
     .catch((err) => {
@@ -122,6 +124,7 @@ router.get("/patients/:id", (req, res) => {
         results,
         viewingPatientResults: true,
         loggedIn: req.session.loggedIn,
+        patientspage: 1,
       });
     })
     .catch((err) => {
@@ -158,6 +161,7 @@ router.get("/results/:id", (req, res) => {
           rundata,
           viewingPatientResults: true,
           loggedIn: req.session.loggedIn,
+          resultspage: 1,
         });
       });
     })
@@ -197,6 +201,7 @@ router.get("/run-metrics", (req, res) => {
         results,
         chartdata,
         loggedIn: req.session.loggedIn,
+        runmetrics: 1,
       });
     })
     .catch((err) => {
@@ -205,7 +210,7 @@ router.get("/run-metrics", (req, res) => {
     });
 });
 
-// Renders the start run 
+// Renders the start run
 router.get("/start-run", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect("login");
@@ -215,25 +220,22 @@ router.get("/start-run", (req, res) => {
     attributes: ["id", "first_name", "last_name", "assay_id"],
     order: ["last_name"],
   })
-  .then((dbTechData) => {
-    const techs = dbTechData.map ((techs) => 
-      techs.get({ plain: true }))
+    .then((dbTechData) => {
+      const techs = dbTechData.map((techs) => techs.get({ plain: true }));
       Assay.findAll({
         attributes: ["id", "assay_name", "analyte"],
-        order: ["id"]
-      })
-      .then((dbAssayData) => {
-        const assays = dbAssayData.map ((assays) => 
-        assays.get({ plain: true }))
+        order: ["id"],
+      }).then((dbAssayData) => {
+        const assays = dbAssayData.map((assays) => assays.get({ plain: true }));
         res.render("start-run", {
           techs,
           assays,
           loggedIn: req.session.loggedIn,
           notification: req.query.notification,
-        })
-      })
-    
-  })
+          startrunpage: 1,
+        });
+      });
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -259,6 +261,7 @@ router.get("/accession-case", (req, res) => {
         patients,
         loggedIn: req.session.loggedIn,
         notification: req.query.notification,
+        accessioncasepage: 1,
       });
     })
     .catch((err) => {
@@ -302,6 +305,7 @@ router.get("/enter-results", (req, res) => {
         results,
         loggedIn: req.session.loggedIn,
         notification: req.query.notification,
+        enterresultspage:1, 
       });
     })
     .catch((err) => {
@@ -318,6 +322,7 @@ router.get("/create-patient", (req, res) => {
   res.render("create-patient", {
     notification: req.query.notification,
     loggedIn: req.session.loggedIn,
+    createpatientpage:1 ,
   });
 });
 
