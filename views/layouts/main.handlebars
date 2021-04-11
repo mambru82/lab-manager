@@ -24,13 +24,17 @@
 <body>
   <div class="wrapper">
     <header>
+      {{#unless loggedIn}}
       {{>nav}}
+      {{/unless}}
       <!-- <h1>
                 <a href="/">Lab Manager</a>
             </h1>-->
       {{#if loggedIn}}
       <nav>
-        <button id="logout" class="btn-no-style">logout</button>
+        <button id="logout" class="btn btn-warning ms-1 position-absolute top-0 end-0">
+          logout
+          </button>
       </nav>
       {{else}}
       <nav>
